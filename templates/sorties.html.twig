@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <h2>Bienvenue </h2>
+    <br>
+
+    <h3>Listes des sorties : </h3>
+
+
+    {# TODO ajouter un systeme de liste pour afficher mes sortie en BDD #}
+
+    {% for sortie in sorties %}
+
+        <h5>{{ sortie.nom }}</h5>
+        <div>{{ sortie.infoSortie}}</div>
+
+    {% endfor %}
+
+
+{% endblock %}
+
+{% block title %}
+{{ parent() }} - Accueil
+{% endblock %}
+
