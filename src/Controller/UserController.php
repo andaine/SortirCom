@@ -8,9 +8,9 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class UserController extends AbstractController
 {
-    #[Route('/', name: 'seConnecter')]
+    #[Route('user/', name: 'user_modifier')]
     public function seConnecter(): Response
     {
-        return $this->render('user/seConnecter.html.twig');
+        return $this->render('user/modifier.html.twig');
     }
 }
