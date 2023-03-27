@@ -15,7 +15,7 @@ class SortieController extends AbstractController
         // todo choisir le type de tri pour l'affichage des sortie par défaut
         $sorties = $sortieRepository->findAll();
 
-        return $this->render('sorties.html.twig', [
+        return $this->render('sortie/sorties.html.twig', [
             'controller_name' => 'SortieController',
             "sorties"=>$sorties
         ]);
@@ -29,7 +29,7 @@ class SortieController extends AbstractController
         $sortie = $sortieRepository->find($id);
 
 
-        return $this->render('sortie.html.twig', [
+        return $this->render('sortie/sortiedetail.html.twig', [
             'sortie' => $sortie
 
         ]);
