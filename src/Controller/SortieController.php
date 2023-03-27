@@ -15,9 +15,23 @@ class SortieController extends AbstractController
         // todo choisir le type de tri pour l'affichage des sortie par défaut
         $sorties = $sortieRepository->findAll();
 
-        return $this->render('sorties.html.twig', [
+        return $this->render('sortie/sorties.html.twig', [
             'controller_name' => 'SortieController',
             "sorties"=>$sorties
+        ]);
+    }
+
+
+    #[Route('/sortie/{id}', name: 'sortie')]
+    public function detailsSortie(int $id, SortieRepository $sortieRepository): Response
+    {
+        //récupération par l'id d'une sortie
+        $sortie = $sortieRepository->find($id);
+
+
+        return $this->render('sortie/sortiedetail.html.twig', [
+            'sortie' => $sortie
+
         ]);
     }
 }

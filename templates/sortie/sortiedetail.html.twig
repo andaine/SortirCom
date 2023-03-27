@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <h2>{{sortie.nom }}</h2>
+    <div>Date de la sortie : {{ sortie.dateHeureDebut|date("d-m-Y H-i") }}</div>
+    <div>Cloture des inscriptions :{{ sortie.dateLimiteInscription|date("d-m-Y H-i") }}</div>
+    <div>Nombre de Place : {{sortie.nbInscriptionMax }}</div>
+    <div>Durée : {{ sortie.duree}} minutes</div>
+    <div>{{ sortie.infoSortie }}</div>
+
+
+
+
+
+    {# todo quand les user seront lier ajouter le nombre de participant #}
+
+    <div>Etat : {{ sortie.etat.libelle }}</div>
+
+
+
+{% endblock %}
+
+{% block title %}
+
+{% endblock %}
+
