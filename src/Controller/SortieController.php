@@ -20,4 +20,18 @@ class SortieController extends AbstractController
             "sorties"=>$sorties
         ]);
     }
+
+
+    #[Route('/sortie/{id}', name: 'sortie')]
+    public function detailsSortie(int $id, SortieRepository $sortieRepository): Response
+    {
+        //récupération par l'id d'une sortie
+        $sortie = $sortieRepository->find($id);
+
+
+        return $this->render('sortie.html.twig', [
+            'sortie' => $sortie
+
+        ]);
+    }
 }
