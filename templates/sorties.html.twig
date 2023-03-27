@@ -12,8 +12,16 @@
 
     {% for sortie in sorties %}
 
-        <h5>{{ sortie.nom }}</h5>
-        <div>{{ sortie.infoSortie}}</div>
+        <h5>Nom : {{ sortie.nom }}</h5>
+        <div>Date de la sortie : {{ sortie.dateHeureDebut|date("d-m-Y H-i") }}</div>
+        <div>Cloture des inscriptions :{{ sortie.dateLimiteInscription|date("d-m-Y H-i") }}</div>
+        {# todo quand les user seront lier ajouter le nombre de participant #}
+        <div>Date de la sortie : {{ sortie.dateHeureDebut|date("d-m-Y H-i") }}</div>
+        <div>Etat : {{ sortie.etat.libelle }}</div>
+        {# todo faire une ternaire si on est la personne qui poste l'annonce voir moidifer/ supprimer sinon afficher  #}
+        <div>Action : <a href="{{  }}"></a></div>
+      
+
 
     {% endfor %}
 
