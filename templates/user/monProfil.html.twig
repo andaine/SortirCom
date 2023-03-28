@@ -4,11 +4,13 @@
 
 {% block body %}
 
-    {{ form_start(userForm) }}
+    Prénom : {{ user.prenom }}<br>
+    Nom : {{ user.nom }}<br>
+    Téléphone : {{ user.telephone }}
+    Email : {{ user.email }}<br>
+    Site de rattachement : {{ user.site.nom }}<br>
 
-    {{ form_widget(userForm) }}
-
-    {{ form_end(userForm) }}
+    <button>Modifier</button>
 
 
 {#    <div>#}
