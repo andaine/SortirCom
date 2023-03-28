@@ -5,19 +5,13 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Sortir.com</title>
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <title>{%block title %}Sortir.com{% endblock %}</title>
 </head>
 <body>
 
-<header>
-    <h1>
-        Sortir.com
-        <img src="{{ asset('img/logo_projet.jpg') }}">
-    </h1>
+{% include 'include/header.html.twig' %}
 
-    {# TODO : faire une nav bar #}
-
-</header>
 
 {#2 variables possibles à renseigner dans la boucle for#}
 {% for label, messages in app.flashes %}
@@ -32,9 +26,8 @@
     {% block body  %}{% endblock %}
 </main>
 
-<footer>
 
-</footer>
+{% include 'include/footer.html.twig' %}
 
 </body>
 </html>

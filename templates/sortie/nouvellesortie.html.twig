@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+{{ parent() }} - Nouvelle Sortie
+{% endblock %}
+
+{% block body %}
+{{ form_start(sortieForm) }}
+    {{ form_widget(sortieForm) }}
+<button>Ajouter une nouvelle sortie</button>
+    {{ form_end(sortieForm) }}
+
+
+{% endblock %}
+
