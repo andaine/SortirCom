@@ -39,10 +39,13 @@ class ParticipantController extends AbstractController
     }
 
     #[Route('user/{id}', name: 'user_monProfil')]
-    public function monProfil(ParticipantRepository $pr, $id): Response
+    public function monProfil(ParticipantRepository $pr, $id, Request $req): Response
     {
         $user = $pr->find($id);
 
+        if ($this->isCsrfTokenValid('modify' . $user->getId(), $req->get('_token'))) {
+            return $this->redirectToRoute('user_modifier');
+        }
         return $this->render('user/monProfil.html.twig', [
             'user'=>$user
         ]);
