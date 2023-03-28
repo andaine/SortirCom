@@ -4,6 +4,22 @@
 
 {% block body %}
 
+    {{ form_start(userForm) }}
+
+    {{ form_widget(userForm) }}
+
+    <button>Enregistrer</button>
+
+    {{ form_end(userForm) }}
+
+
+{#    <div>#}
+{#        #}{#pour contrer la faille de sécu d'injection de code, comme on n'est pas dans un form_widget, il faut créer un token sur le bouton "Delete"#}
+{#        <form action="{{ path('user_modifier', {'id' : participant.id})}}">#}
+{#            <input type="hidden" name='_token' value="{{ csrf_token('modify'~participant.id) }}">#}
+{#            <button>Enregistrer</button>#}
+{#        </form>#}
+{#    </div>#}
 
 {% endblock %}
 
