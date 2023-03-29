@@ -7,6 +7,7 @@ use App\Form\ParticipantType;
 use App\Repository\ParticipantRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Exception\LogicException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -24,12 +25,19 @@ class ParticipantController extends AbstractController
         $userForm->handleRequest($req);
 
         if ($userForm->isSubmitted() && $userForm->isValid()) {
-            if($userForm->get('enregistrer')->isClicked()) {
-                $em->flush();
-                return $this->redirectToRoute('user_monProfil',['id'=> $user->getId()]);
+            if($userForm->get('newPassword')->getData() === $userForm->get('password')->getData()){
+                if($userForm->get('enregistrer')->isClicked()) {
+                    $em->flush();
+                    return $this->redirectToRoute('user_monProfil',['id'=> $user->getId()]);
+                } else {
+                    return $this->redirectToRoute('user_monProfil',['id'=> $user->getId()]);
+                }
             } else {
+                //throw new \LogicException('Les 2 passwords sont différents');
+                $this->addFlash('error', 'Les 2 mots de passe doivent être identiques');
                 return $this->redirectToRoute('user_monProfil',['id'=> $user->getId()]);
             }
+
         }
 
         return $this->render('user/modifier.html.twig', [
@@ -50,4 +58,6 @@ class ParticipantController extends AbstractController
             'user'=>$user
         ]);
     }
+
+
 }
