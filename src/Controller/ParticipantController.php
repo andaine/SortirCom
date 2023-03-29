@@ -17,7 +17,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ParticipantController extends AbstractController
 {
     #[Route('user/modify/{id}', name: 'user_modifier')]
-    public function modifierProfil(Request $req, ParticipantRepository $pr, $id, EntityManagerInterface $em): Response
+    public function modifierProfil(UserPasswordHasherInterface $userPasswordHasher, Request $req, ParticipantRepository $pr, $id, EntityManagerInterface $em): Response
     {
         $user = $pr->find($id);
         $user->setPassword('');
@@ -27,6 +27,12 @@ class ParticipantController extends AbstractController
         if ($userForm->isSubmitted() && $userForm->isValid()) {
             if($userForm->get('newPassword')->getData() === $userForm->get('password')->getData()){
                 if($userForm->get('enregistrer')->isClicked()) {
+                    $user->setPassword(
+                        $userPasswordHasher->hashPassword(
+                        $user,
+                        $userForm->get('password')->getData()
+                    )
+                    );
                     $em->flush();
                     return $this->redirectToRoute('user_monProfil',['id'=> $user->getId()]);
                 } else {
