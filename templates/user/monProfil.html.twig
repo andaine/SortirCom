@@ -4,11 +4,16 @@
 
 {% block body %}
 
-    {{ form_start(userForm) }}
+    Prénom : {{ user.prenom }}<br>
+    Nom : {{ user.nom }}<br>
+    Téléphone : {{ user.telephone }}
+    Email : {{ user.email }}<br>
+    Site de rattachement : {{ user.site.nom }}<br>
 
-    {{ form_widget(userForm) }}
-
-    {{ form_end(userForm) }}
+    <form action="{{ path('user_modifier', {'id' : user.id})}}">
+        <input type="hidden" name='_token' value="{{ csrf_token('modify'~user.id) }}">
+        <button>Modifier</button>
+    </form>
 
 
 {#    <div>#}
