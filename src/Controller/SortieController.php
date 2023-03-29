@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Etat;
 use App\Entity\Sortie;
 use App\Form\SortieType;
+use App\Repository\EtatRepository;
 use App\Repository\SortieRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -40,7 +42,7 @@ class SortieController extends AbstractController
     }
 
     #[Route('/nouvellesortie', name: 'nouvelle_sortie')]
-    public function nouvelleSortie(Request $request, EntityManagerInterface $entityManager): Response
+    public function nouvelleSortie(Request $request, EntityManagerInterface $entityManager,EtatRepository $etatRepository): Response
     {
         $sortie = new Sortie();
 
@@ -48,14 +50,14 @@ class SortieController extends AbstractController
         $sortieForm->handleRequest($request);
 
         if ($sortieForm->isSubmitted() && $sortieForm->isValid()){
-           // $sortie->setEtat();
+           $etat = $etatRepository->find(1);
+           $sortie->setEtat($etat);
             $entityManager->persist($sortie);
             $entityManager->flush();
 
+            $this->addFlash("success", "Sortie Ajouter ! ");
+            return $this->redirectToRoute('sorties');
         }
-
-
-
 
         return $this->render('sortie/nouvellesortie.html.twig', [
             'sortieForm' => $sortieForm
