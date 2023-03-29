@@ -7,9 +7,14 @@
 {% block body %}
 {{ form_start(sortieForm) }}
     {{ form_widget(sortieForm) }}
-<button>Ajouter une nouvelle sortie</button>
+
+    <button>Ajouter une nouvelle sortie</button>
+
+    <button type="submit" name="etat" value="publier">Publier la sortie</button>
 
     {{ form_end(sortieForm) }}
+
+
 
 
 {% endblock %}

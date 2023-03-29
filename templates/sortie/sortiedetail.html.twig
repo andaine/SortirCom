@@ -24,7 +24,7 @@
 
     <div>Etat : {{ sortie.etat.libelle }}</div>
 
-
+    <a href="{{ path('modifier_sortie',{'id':sortie.id()}) }}">Modifier Sortie</a>
 
 {% endblock %}
 
