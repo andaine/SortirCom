@@ -84,15 +84,19 @@ class SortieController extends AbstractController
         $sortieForm->handleRequest($request);
 
         if ($sortieForm->isSubmitted() && $sortieForm->isValid()){
-            //if bouton publier on fait un etat publier
 
-            $etat = $request->request->get('etat');
-            if ($etat === 'publier'){
+            if ($request->get('publier') == 'publier'){
                 $etat = $etatRepository->find(2);
                 $sortie->setEtat($etat);
                 $entityManager->flush();
                 return $this->redirectToRoute("sorties");
             }
+
+            if ($request->get('supprimer') == 'supprimer'){
+                $this->supprimerSortie($id,$sortieRepository,$request,$entityManager);
+            }
+
+
 
             $entityManager->flush();
 
@@ -101,10 +105,31 @@ class SortieController extends AbstractController
         }
 
         return $this->render('sortie/nouvellesortie.html.twig', [
-            'sortieForm' => $sortieForm
+            'sortieForm' => $sortieForm,
+            'sortie'=>$sortie
 
         ]);
     }
+
+
+
+    public function supprimerSortie(int $id,
+                                   SortieRepository $sortieRepository,
+                                   Request $request,
+                                   EntityManagerInterface $entityManager,
+                                  ): Response
+    {
+        $sortie = $sortieRepository->find($id);
+            $entityManager->remove($sortie);
+            $entityManager->flush();
+        $this->addFlash("success", "Sortie Supprimer ! ");
+    return $this->redirectToRoute('sorties');
+
+    }
+
+
+
+
 
 
 }
