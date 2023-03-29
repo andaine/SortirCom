@@ -83,23 +83,17 @@ class SortieController extends AbstractController
 
         $sortieForm->handleRequest($request);
 
+        if ($request->get('publier') == 'publier'){
+            $this->publierSortie($id,$sortieRepository,$request,$entityManager,$etatRepository);
+        }
+
+        if ($request->get('supprimer') == 'supprimer'){
+            $this->supprimerSortie($id,$sortieRepository,$request,$entityManager,$etatRepository);
+        }
+
         if ($sortieForm->isSubmitted() && $sortieForm->isValid()){
 
-            if ($request->get('publier') == 'publier'){
-                $etat = $etatRepository->find(2);
-                $sortie->setEtat($etat);
-                $entityManager->flush();
-                return $this->redirectToRoute("sorties");
-            }
-
-            if ($request->get('supprimer') == 'supprimer'){
-                $this->supprimerSortie($id,$sortieRepository,$request,$entityManager);
-            }
-
-
-
             $entityManager->flush();
-
             $this->addFlash("success", "Sortie Modifié ! ");
             return $this->redirectToRoute('sorties');
         }
@@ -112,17 +106,31 @@ class SortieController extends AbstractController
     }
 
 
-
+    public function publierSortie(int $id,
+                                  SortieRepository $sortieRepository,
+                                  Request $request,
+                                  EntityManagerInterface $entityManager,
+                                  EtatRepository $etatRepository){
+        $sortie = $sortieRepository->find($id);
+        $etat = $etatRepository->find(2);
+        $sortie->setEtat($etat);
+        $entityManager->flush();
+        $this->addFlash("success", "Sortie Publié ! ");
+        return $this->redirectToRoute("sorties");
+    }
     public function supprimerSortie(int $id,
                                    SortieRepository $sortieRepository,
                                    Request $request,
                                    EntityManagerInterface $entityManager,
+                                    EtatRepository $etatRepository
+
                                   ): Response
     {
         $sortie = $sortieRepository->find($id);
-            $entityManager->remove($sortie);
-            $entityManager->flush();
-        $this->addFlash("success", "Sortie Supprimer ! ");
+        $etat = $etatRepository->find(6);
+        $sortie->setEtat($etat);
+        $entityManager->flush();
+        $this->addFlash("success", "Sortie Annuler ! ");
     return $this->redirectToRoute('sorties');
 
     }
