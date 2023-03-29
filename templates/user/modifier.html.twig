@@ -6,6 +6,10 @@
 
     {{ form_start(userForm) }}
 
+    {% for flash_error in app.flashes('error') %}
+        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+    {% endfor %}
+
     {{ form_widget(userForm) }}
 
     {{ form_end(userForm) }}
