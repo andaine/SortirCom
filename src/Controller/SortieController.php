@@ -18,8 +18,8 @@ class SortieController extends AbstractController
     #[Route('/sorties', name: 'sorties')]
     public function afficherToutesSorties(SortieRepository $sortieRepository): Response
     {
-        // todo choisir le type de tri pour l'affichage des sortie par défaut
-        $sorties = $sortieRepository->findAll();
+
+            $sorties = $sortieRepository->findBy(['etat' => [1,2,3,4]]);
 
         return $this->render('sortie/sorties.html.twig', [
             'controller_name' => 'SortieController',
@@ -85,14 +85,15 @@ class SortieController extends AbstractController
 
         if ($request->get('publier') == 'publier'){
             $this->publierSortie($id,$sortieRepository,$request,$entityManager,$etatRepository);
+
         }
 
         if ($request->get('supprimer') == 'supprimer'){
             $this->supprimerSortie($id,$sortieRepository,$request,$entityManager,$etatRepository);
+
         }
 
         if ($sortieForm->isSubmitted() && $sortieForm->isValid()){
-
             $entityManager->flush();
             $this->addFlash("success", "Sortie Modifié ! ");
             return $this->redirectToRoute('sorties');
@@ -130,7 +131,7 @@ class SortieController extends AbstractController
         $etat = $etatRepository->find(6);
         $sortie->setEtat($etat);
         $entityManager->flush();
-        $this->addFlash("success", "Sortie Annuler ! ");
+        $this->addFlash("success", "Sortie Annulée ! ");
     return $this->redirectToRoute('sorties');
 
     }
