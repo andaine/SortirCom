@@ -12,14 +12,16 @@
 
     {% for sortie in sorties %}
 
-        <h5>Nom : {{ sortie.nom }}</h5>
+        <a href="{{ path('sortie', {'id':sortie.id()}) }}">
+            <h5>{{ sortie.nom }}</h5>
+        </a>
         <div>Date de la sortie : {{ sortie.dateHeureDebut|date("d-m-Y H-i") }}</div>
         <div>Cloture des inscriptions :{{ sortie.dateLimiteInscription|date("d-m-Y H-i") }}</div>
         {# todo quand les user seront lier ajouter le nombre de participant #}
         <div>Nombre de participant : x / {{ sortie.nbInscriptionMax }}</div>
         <div>Etat : {{ sortie.etat.libelle }}</div>
         {# todo faire une ternaire si on est la personne qui poste l'annonce voir moidifer/ supprimer sinon afficher  #}
-        <div>Action : <a href="{{ path('sortie', {'id':sortie.id()}) }}">Afficher</a></div>
+
       
 
 

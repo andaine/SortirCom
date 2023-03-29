@@ -46,12 +46,18 @@ class SortieController extends AbstractController
     {
         $sortie = new Sortie();
 
+        $sortie->setDateHeureDebut(new \DateTime('now'));
+
         $sortieForm = $this->createForm(SortieType::class, $sortie);
+        //ajout de la date du jour
+
+
         $sortieForm->handleRequest($request);
 
         if ($sortieForm->isSubmitted() && $sortieForm->isValid()){
            $etat = $etatRepository->find(1);
            $sortie->setEtat($etat);
+
             $entityManager->persist($sortie);
             $entityManager->flush();
 
@@ -64,4 +70,41 @@ class SortieController extends AbstractController
 
         ]);
     }
+
+    #[Route('/modifiersortie/{id}', name: 'modifier_sortie')]
+    public function modifierSortie(int $id,
+                                   SortieRepository $sortieRepository,
+                                   Request $request,
+                                   EntityManagerInterface $entityManager,
+                                   EtatRepository $etatRepository): Response
+    {
+        $sortie = $sortieRepository->find($id);
+        $sortieForm = $this->createForm(SortieType::class, $sortie);
+
+        $sortieForm->handleRequest($request);
+
+        if ($sortieForm->isSubmitted() && $sortieForm->isValid()){
+            //if bouton publier on fait un etat publier
+
+            $etat = $request->request->get('etat');
+            if ($etat === 'publier'){
+                $etat = $etatRepository->find(2);
+                $sortie->setEtat($etat);
+                $entityManager->flush();
+                return $this->redirectToRoute("sorties");
+            }
+
+            $entityManager->flush();
+
+            $this->addFlash("success", "Sortie Modifié ! ");
+            return $this->redirectToRoute('sorties');
+        }
+
+        return $this->render('sortie/nouvellesortie.html.twig', [
+            'sortieForm' => $sortieForm
+
+        ]);
+    }
+
+
 }
