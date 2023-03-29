@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Etat;
 use App\Entity\Sortie;
+use App\Form\FiltreType;
 use App\Form\SortieType;
 use App\Repository\EtatRepository;
 use App\Repository\SortieRepository;
@@ -18,12 +19,13 @@ class SortieController extends AbstractController
     #[Route('/sorties', name: 'sorties')]
     public function afficherToutesSorties(SortieRepository $sortieRepository): Response
     {
-
         $sorties = $sortieRepository->findBy(['etat' => [1, 2, 3, 4]]);
+        $sortieForm = $this->createForm(FiltreType::class);
 
         return $this->render('sortie/sorties.html.twig', [
             'controller_name' => 'SortieController',
-            "sorties" => $sorties
+            "sorties" => $sorties,
+            'filtreForm'=> $sortieForm
         ]);
     }
 
@@ -136,6 +138,5 @@ class SortieController extends AbstractController
         $this->addFlash("success", "Sortie Annulée ! ");
         return $this->redirectToRoute("sorties");
     }
-
 
 }
