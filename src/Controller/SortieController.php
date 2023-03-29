@@ -19,11 +19,11 @@ class SortieController extends AbstractController
     public function afficherToutesSorties(SortieRepository $sortieRepository): Response
     {
 
-            $sorties = $sortieRepository->findBy(['etat' => [1,2,3,4]]);
+        $sorties = $sortieRepository->findBy(['etat' => [1, 2, 3, 4]]);
 
         return $this->render('sortie/sorties.html.twig', [
             'controller_name' => 'SortieController',
-            "sorties"=>$sorties
+            "sorties" => $sorties
         ]);
     }
 
@@ -42,7 +42,7 @@ class SortieController extends AbstractController
     }
 
     #[Route('/nouvellesortie', name: 'nouvelle_sortie')]
-    public function nouvelleSortie(Request $request, EntityManagerInterface $entityManager,EtatRepository $etatRepository): Response
+    public function nouvelleSortie(Request $request, EntityManagerInterface $entityManager, EtatRepository $etatRepository): Response
     {
         $sortie = new Sortie();
 
@@ -51,12 +51,15 @@ class SortieController extends AbstractController
         $sortieForm = $this->createForm(SortieType::class, $sortie);
         //ajout de la date du jour
 
-
         $sortieForm->handleRequest($request);
 
-        if ($sortieForm->isSubmitted() && $sortieForm->isValid()){
-           $etat = $etatRepository->find(1);
-           $sortie->setEtat($etat);
+        if ($sortieForm->isSubmitted() && $sortieForm->isValid()) {
+            $etat = $etatRepository->find(1);
+            $sortie->setEtat($etat);
+            $user = $this->getUser();
+            $sortie->setOrganisateur($user);
+            $sortie->setSite($user->getSite());
+
 
             $entityManager->persist($sortie);
             $entityManager->flush();
@@ -72,28 +75,29 @@ class SortieController extends AbstractController
     }
 
     #[Route('/modifiersortie/{id}', name: 'modifier_sortie')]
-    public function modifierSortie(int $id,
-                                   SortieRepository $sortieRepository,
-                                   Request $request,
+    public function modifierSortie(int                    $id,
+                                   SortieRepository       $sortieRepository,
+                                   Request                $request,
                                    EntityManagerInterface $entityManager,
-                                   EtatRepository $etatRepository): Response
+                                   EtatRepository         $etatRepository): Response
     {
         $sortie = $sortieRepository->find($id);
         $sortieForm = $this->createForm(SortieType::class, $sortie);
 
         $sortieForm->handleRequest($request);
+        $modificationAutre = false;
 
-        if ($request->get('publier') == 'publier'){
-            $this->publierSortie($id,$sortieRepository,$request,$entityManager,$etatRepository);
+        if ($request->get('publier') == 'publier') {
+            return $this->publierSortie($id, $sortieRepository, $entityManager, $etatRepository);
 
-        }
-
-        if ($request->get('supprimer') == 'supprimer'){
-            $this->supprimerSortie($id,$sortieRepository,$request,$entityManager,$etatRepository);
 
         }
 
-        if ($sortieForm->isSubmitted() && $sortieForm->isValid()){
+        if ($request->get('supprimer') == 'supprimer') {
+           return $this->supprimerSortie($id, $sortieRepository, $entityManager, $etatRepository);
+        }
+
+        if ($sortieForm->isSubmitted() && $sortieForm->isValid()) {
             $entityManager->flush();
             $this->addFlash("success", "Sortie Modifié ! ");
             return $this->redirectToRoute('sorties');
@@ -101,17 +105,17 @@ class SortieController extends AbstractController
 
         return $this->render('sortie/nouvellesortie.html.twig', [
             'sortieForm' => $sortieForm,
-            'sortie'=>$sortie
+            'sortie' => $sortie
 
         ]);
     }
 
 
-    public function publierSortie(int $id,
-                                  SortieRepository $sortieRepository,
-                                  Request $request,
+    public function publierSortie(int                    $id,
+                                  SortieRepository       $sortieRepository,
                                   EntityManagerInterface $entityManager,
-                                  EtatRepository $etatRepository){
+                                  EtatRepository         $etatRepository)
+    {
         $sortie = $sortieRepository->find($id);
         $etat = $etatRepository->find(2);
         $sortie->setEtat($etat);
@@ -119,26 +123,19 @@ class SortieController extends AbstractController
         $this->addFlash("success", "Sortie Publié ! ");
         return $this->redirectToRoute("sorties");
     }
-    public function supprimerSortie(int $id,
-                                   SortieRepository $sortieRepository,
-                                   Request $request,
-                                   EntityManagerInterface $entityManager,
-                                    EtatRepository $etatRepository
 
-                                  ): Response
+    public function supprimerSortie(int                    $id,
+                                    SortieRepository       $sortieRepository,
+                                    EntityManagerInterface $entityManager,
+                                    EtatRepository         $etatRepository): Response
     {
         $sortie = $sortieRepository->find($id);
         $etat = $etatRepository->find(6);
         $sortie->setEtat($etat);
         $entityManager->flush();
         $this->addFlash("success", "Sortie Annulée ! ");
-    return $this->redirectToRoute('sorties');
-
+        return $this->redirectToRoute("sorties");
     }
-
-
-
-
 
 
 }
