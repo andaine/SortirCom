@@ -51,12 +51,15 @@ class SortieController extends AbstractController
         $sortieForm = $this->createForm(SortieType::class, $sortie);
         //ajout de la date du jour
 
-
         $sortieForm->handleRequest($request);
 
         if ($sortieForm->isSubmitted() && $sortieForm->isValid()) {
             $etat = $etatRepository->find(1);
             $sortie->setEtat($etat);
+            $user = $this->getUser();
+            $sortie->setOrganisateur($user);
+            $sortie->setSite($user->getSite());
+
 
             $entityManager->persist($sortie);
             $entityManager->flush();
