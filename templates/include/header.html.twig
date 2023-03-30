@@ -1,17 +1,14 @@
 <header>
     <a href="{{ path('sorties') }}">
-        <h1>
-            Sortir.com
-        </h1>
         <img src="{{ asset('img/LogoSymfony.png') }}">
     </a>
+    <h1>Sortir.com</h1>
+</header>
 
 <nav>
     <a href="{{ path('sorties') }}">Accueil</a>
-    <a href="{{ path('nouvelle_sortie') }}">Proposer une sortie</a>
     {% if app.user %}
         <a href="{{ path('user_monProfil', {'id' : app.user.id})}}">Mon profil</a>
     {% endif %}
+    <a href="{{ path('nouvelle_sortie') }}">Ajouter une sortie</a>
 </nav>
-
-</header>

@@ -2,34 +2,32 @@
 
 {% block body %}
 
-    <h2>Bienvenue </h2>
-    <br>
-
-    <h3>Listes des sorties : </h3>
+    <h2>Listes des sorties : </h2>
 
     <h4>Filtrer les sorties</h4>
+    <div class="recherche">
     {{ form_start(filtreForm) }}
-
     {{ form_end(filtreForm) }}
-
-
-
-
+    </div>
+<div class="sortiestyle">
     {% for sortie in sorties %}
+
+        <div class="sorticard">
 
         <a href="{{ path('sortie', {'id':sortie.id()}) }}">
             <h5>{{ sortie.nom }}</h5>
         </a>
         <h6>organisé par : <a href="{{ path('user_monProfil',{'id':sortie.organisateur.id}) }}">{{ sortie.organisateur.nom }}</a></h6>
-         <div>Date de la sortie : {{ sortie.dateHeureDebut|date("d-m-Y H-i") }}</div>
-        <div>Cloture des inscriptions :{{ sortie.dateLimiteInscription|date("d-m-Y H-i") }}</div>
-        <div>Nombre de participant : {{ sortie.inscriptions.count }} / {{ sortie.nbInscriptionMax }}</div>
+         <div>Date : {{ sortie.dateHeureDebut|date("d/m/Y H:i") }}</div>
+        <div>Cloture inscriptions : {{ sortie.dateLimiteInscription|date("d/m/Y") }}</div>
+        <div>Nombres de participants : {{ sortie.inscriptions.count }} / {{ sortie.nbInscriptionMax }}</div>
         <div>Etat : {{ sortie.etat.libelle }}</div>
         {# todo faire une ternaire si on est la personne qui poste l'annonce voir moidifer/ supprimer sinon afficher  #}
 
         <a href="{{ path('participer',{'idsortie':sortie.id()}) }}">participer</a>
+        </div>
     {% endfor %}
-
+    </div>
 
 {% endblock %}
 
