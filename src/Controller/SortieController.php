@@ -123,33 +123,27 @@ class SortieController extends AbstractController
     }
 
 
-    #[Route('participer/{idsortie}', name: 'participer')]   //id de l'evenement
-    public function participer(EntityManagerInterface $entityManager,
-                               ParticipantRepository $participantRepository,
-                               SortieRepository $sortieRepository,
-                               $idsortie,
-                               int $idparticipant,
-                               Request $request): Response
-    {       //problème user recuperer id
+        #[Route('participer/{idsortie}', name: 'participer')]   //id de l'evenement
+        public function participer(EntityManagerInterface $entityManager,
+                                   ParticipantRepository $participantRepository,
+                                   SortieRepository $sortieRepository,
+                                   $idsortie,
+                                   Request $request): Response
+        {
+            $user = $this->getUser();
+            $sortie = $sortieRepository->find($idsortie);
 
-        $user = $participantRepository->find($idparticipant);
-        $sortie = $sortieRepository->find($idsortie);
+            $inscription = new Inscription();
+            $inscription->setParticipant($user);
+            $inscription->setSortie($sortie);
+            $inscription->setDate(new \DateTime('now'));
 
-        $inscription = new Inscription();
-        $inscription->setParticipant($user->getId());
-        $inscription->setSortie($sortie->getId());
-        $inscription->setDate(new \DateTime('now'));
+            $entityManager->persist($inscription);
+            $entityManager->flush();
 
-        $entityManager->persist($inscription);
-        $entityManager->flush();
-        $this->addFlash("success", "Participation Ajouter ! ");
-
-
-
-        return $this->render('user/monProfil.html.twig', [
-            'user'=>$user
-        ]);
-    }
+            $this->addFlash("success", "participation ajouter ! ");
+            return $this->redirectToRoute('sorties');
+        }
 
 
 
