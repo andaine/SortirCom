@@ -20,22 +20,23 @@ use Symfony\Component\Routing\Annotation\Route;
 class SortieController extends AbstractController
 {
     #[Route('/sorties', name: 'sorties')]
-    public function afficherToutesSorties(SortieRepository $sortieRepository, Request $req): Response
+    public function afficherToutesSorties(SortieRepository $sortieRepository, Request $req)
     {
         //Créer une instance de filtre
         $filtre = new filtre();
 
+        $userConnecte = $this->getUser()->getId();
         $sortieForm = $this->createForm(FiltreType::class, $filtre);
         $sortieForm->handleRequest($req);
 
-        $sorties = $sortieRepository->findByFiltre($filtre);
+        $sorties = $sortieRepository->findByFiltre($filtre,$userConnecte);
 
         //$sorties = $sortieRepository->findBy(['etat' => [1, 2, 3, 4]]);
 
         return $this->render('sortie/sorties.html.twig', [
             'controller_name' => 'SortieController',
             "sorties" => $sorties,
-            'filtreForm' => $sortieForm
+            'filtreForm' => $sortieForm->createView()
         ]);
     }
 

@@ -75,23 +75,46 @@ class SortieRepository extends ServiceEntityRepository
 //
 //        $queryBuilder -> andWhere('s.site');
 //    }
-    public function findByFiltre(filtre $filtre) {
+    public function findByFiltre(filtre $filtre, $userConnecte) {
         $query = $this
-            ->createQueryBuilder('s')
-            ->select('site','s')
-            ->join('s.site','site');
+            ->createQueryBuilder('sorties')
+            ->select('sites','sorties')
+            ->join('sorties.site','sites');
 
-        if (!empty($filtre->q)){
+        if (!empty($filtre->site)){
             $query = $query
-                ->andWhere('s.site like :q')
-                ->setParameter('q', "%{$filtre->q}%");
+                ->andWhere('sites.id = (:site)')
+                ->setParameter('site', $filtre->site->getId());
         }
 
-        $query = $query->getQuery();
+        if (!empty($filtre->global)){
+            $query = $query
+                ->andWhere('sorties.nom like :global')
+                ->setParameter('global', "%{$filtre->global}%");
+        }
 
-        $paginator = new Paginator($query);
-        return $paginator;
+        if (!empty($filtre->dateDebut)&&!empty($filtre->dateFin)){
+            $query = $query
+                ->andWhere('sorties.dateHeureDebut >= :dateDebut')
+                ->andWhere('sorties.dateHeureDebut <= :dateFin')
+                ->setParameter('dateDebut', $filtre->dateDebut)
+                ->setParameter('dateFin', $filtre->dateFin);
+        }
 
+        if (!empty($filtre->organisateur)){
+            $query = $query
+                ->andWhere('sorties.organisateur = :organisateur')
+                ->setParameter('organisateur', $userConnecte);
+        }
+
+//        if (!empty($filtre->inscrit)){
+//            $query = $query
+//                ->andWhere('sorties.inscription.participant = :inscrit')
+//                ->setParameter('inscrit', $userConnecte);
+//        }
+
+
+        return $query->getQuery()->getResult();
     }
 
 

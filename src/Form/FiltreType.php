@@ -8,7 +8,7 @@ use App\Repository\SiteRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -34,12 +34,15 @@ class FiltreType extends AbstractType
                     'placeholder' => 'Rechercher'
     ]
             ])
-            ->add('dateDebut', DateType::class,[
+            ->add('dateDebut', DateTimeType::class,[
+                'label' => 'Entre',
                 'html5' => true,
                 'widget' => 'single_text',
                 'required' => false
+
             ])
-            ->add('dateFin', DateType::class,[
+            ->add('dateFin', DateTimeType::class,[
+                'label' => 'et',
                 'html5' => true,
                 'widget' => 'single_text',
                 'required' => false
@@ -47,6 +50,7 @@ class FiltreType extends AbstractType
             ->add('organisateur',CheckboxType::class, [
                 'label'    => 'Sorties dont je suis l\'organisateur',
                 'required' => false
+
             ])
             ->add('inscrit',CheckboxType::class, [
                 'label'    => 'Sorties auxquelles je suis inscrit/e',
