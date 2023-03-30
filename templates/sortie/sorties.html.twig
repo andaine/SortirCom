@@ -27,7 +27,7 @@
         <div>Etat : {{ sortie.etat.libelle }}</div>
         {# todo faire une ternaire si on est la personne qui poste l'annonce voir moidifer/ supprimer sinon afficher  #}
 
-
+        <a href="{{ path('participer',{'idsortie':sortie.id()}) }}">participer</a>
     {% endfor %}
 
 
