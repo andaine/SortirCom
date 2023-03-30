@@ -25,7 +25,8 @@ class SortieController extends AbstractController
         //Créer une instance de filtre
         $filtre = new filtre();
 
-        $userConnecte = $this->getUser()->getId();
+        $userConnecte = $this->getUser();//->getId();
+        dump($userConnecte);
         $sortieForm = $this->createForm(FiltreType::class, $filtre);
         $sortieForm->handleRequest($req);
 
@@ -73,11 +74,11 @@ class SortieController extends AbstractController
             $sortie->setOrganisateur($user);
             $sortie->setSite($user->getSite());
 
-
             $entityManager->persist($sortie);
             $entityManager->flush();
 
-            $this->addFlash("success", "Sortie Ajouter ! ");
+            $this->addFlash("success", "Sortie ajoutée ! ");
+
             return $this->redirectToRoute('sorties');
         }
 

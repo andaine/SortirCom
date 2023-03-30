@@ -76,10 +76,12 @@ class SortieRepository extends ServiceEntityRepository
 //        $queryBuilder -> andWhere('s.site');
 //    }
     public function findByFiltre(filtre $filtre, $userConnecte) {
+        $dateJour = new \DateTime();
         $query = $this
             ->createQueryBuilder('sorties')
             ->select('sites','sorties')
-            ->join('sorties.site','sites');
+            ->join('sorties.site','sites'); //sorties.site correspond au champ "site" de sorties
+
 
         if (!empty($filtre->site)){
             $query = $query
@@ -107,11 +109,25 @@ class SortieRepository extends ServiceEntityRepository
                 ->setParameter('organisateur', $userConnecte);
         }
 
-//        if (!empty($filtre->inscrit)){
-//            $query = $query
-//                ->andWhere('sorties.inscription.participant = :inscrit')
-//                ->setParameter('inscrit', $userConnecte);
-//        }
+        if (!empty($filtre->inscrit)){
+            $query = $query
+                ->join('sorties.inscriptions','sortieIns')
+                ->andWhere('sortieIns.participant = :inscrit')
+                ->setParameter('inscrit', $userConnecte);
+        }
+
+        if (!empty($filtre->pasInscrit)){
+            $query = $query
+                ->join('sorties.inscriptions','sortieIns')
+                ->andWhere('sortieIns.participant != :pasInscrit')
+                ->setParameter('pasInscrit', $userConnecte);
+        }
+
+        if (!empty($filtre->sortiePassee)){
+            $query = $query
+                ->andWhere('sorties.dateHeureDebut > :dateJour')
+                ->setParameter('dateJour', $dateJour);
+        }
 
 
         return $query->getQuery()->getResult();
