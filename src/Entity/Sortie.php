@@ -7,6 +7,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 #[ORM\Entity(repositoryClass: SortieRepository::class)]
 class Sortie
@@ -49,6 +51,7 @@ class Sortie
     #[ORM\ManyToOne(inversedBy: 'organisateurSortie')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Participant $organisateur = null;
+
 
     #[ORM\OneToMany(mappedBy: 'sortie', targetEntity: Inscription::class)]
     private Collection $inscriptions;
