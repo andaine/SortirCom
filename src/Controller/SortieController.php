@@ -3,10 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Etat;
+use App\Entity\Inscription;
 use App\Entity\Sortie;
-use App\Form\FiltreType;
 use App\Form\SortieType;
 use App\Repository\EtatRepository;
+use App\Repository\ParticipantRepository;
 use App\Repository\SortieRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -19,13 +20,12 @@ class SortieController extends AbstractController
     #[Route('/sorties', name: 'sorties')]
     public function afficherToutesSorties(SortieRepository $sortieRepository): Response
     {
+
         $sorties = $sortieRepository->findBy(['etat' => [1, 2, 3, 4]]);
-        $sortieForm = $this->createForm(FiltreType::class);
 
         return $this->render('sortie/sorties.html.twig', [
             'controller_name' => 'SortieController',
-            "sorties" => $sorties,
-            'filtreForm'=> $sortieForm
+            "sorties" => $sorties
         ]);
     }
 
@@ -113,6 +113,36 @@ class SortieController extends AbstractController
     }
 
 
+    #[Route('participer/{idsortie}', name: 'participer')]   //id de l'evenement
+    public function participer(EntityManagerInterface $entityManager,
+                               ParticipantRepository $participantRepository,
+                               SortieRepository $sortieRepository,
+                               $idsortie,
+                               int $idparticipant,
+                               Request $request): Response
+    {       //problème user recuperer id
+
+        $user = $participantRepository->find($idparticipant);
+        $sortie = $sortieRepository->find($idsortie);
+
+        $inscription = new Inscription();
+        $inscription->setParticipant($user->getId());
+        $inscription->setSortie($sortie->getId());
+        $inscription->setDate(new \DateTime('now'));
+
+        $entityManager->persist($inscription);
+        $entityManager->flush();
+        $this->addFlash("success", "Participation Ajouter ! ");
+
+
+
+        return $this->render('user/monProfil.html.twig', [
+            'user'=>$user
+        ]);
+    }
+
+
+
     public function publierSortie(int                    $id,
                                   SortieRepository       $sortieRepository,
                                   EntityManagerInterface $entityManager,
@@ -138,5 +168,8 @@ class SortieController extends AbstractController
         $this->addFlash("success", "Sortie Annulée ! ");
         return $this->redirectToRoute("sorties");
     }
+
+
+
 
 }
