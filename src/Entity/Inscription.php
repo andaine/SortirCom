@@ -5,8 +5,14 @@ namespace App\Entity;
 use App\Repository\InscriptionRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
+// ajout de contrainte unicité
+#[ORM\Table(name: 'inscription')]
 #[ORM\Entity(repositoryClass: InscriptionRepository::class)]
+#[UniqueEntity(
+    fields: ['participant', 'sortie'], message: 'Une inscription pour ce participant et cette sortie existe déjà')]
 class Inscription
 {
     #[ORM\Id]

@@ -69,7 +69,7 @@ select{
     border-radius: 0.3vh;
     color: #00385b;
     border: #00385b 0.15em solid;
-    background-color: #ffffdd;
+    background-color: white;
 }
 
 input{
@@ -123,3 +123,4 @@ text-align: center;
     display: flex;
     justify-content: flex-start;
 }
+

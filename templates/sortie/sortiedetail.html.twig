@@ -16,15 +16,20 @@
     <div>Lieu : {{ sortie.lieu.nom }}</div>
     <div>Latitude : {{ sortie.lieu.latitude }}</div>
     <div>Longitude : {{ sortie.lieu.longitude }}</div>
-
-
-
-
-    {# todo quand les user seront lier ajouter le nombre de participant #}
-
     <div>Etat : {{ sortie.etat.libelle }}</div>
 
-    <a href="{{ path('modifier_sortie',{'id':sortie.id()}) }}">Modifier Sortie</a>
+    {% if sortie.inscriptions is empty %}
+        <p>Aucun participant n'est inscrit pour cette sortie.</p>
+    {% else %}
+        <h3>Liste des participants :</h3>
+        <ul>
+            {% for inscription in sortie.inscriptions %}
+                <li>{{ inscription.participant.pseudo }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <a href="{{ path('modifier_sortie',{'id':sortie.id()}) }}"><button>Modifier Sortie</button></a>
 
 {% endblock %}
 
