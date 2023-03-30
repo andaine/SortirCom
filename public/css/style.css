@@ -26,6 +26,19 @@ header img{
 
 }
 
+table{
+    margin-top: 2vh;
+    padding: 0.5em;
+    border-radius: 0.3vh;
+    color: #00385b;
+    background-color: #ffffdd;
+    box-shadow: 5px 5px 15px 0 rgba(0,0,0,0.3);
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+    border: solid;
+}
+
 a{
     text-decoration: none;
     color: black;
@@ -40,7 +53,44 @@ nav a{
     border: #00385b solid;
     background-color: #ffffdd;
 }
+button{
+    padding:0.5vh 1.6vh 0.5vh 1.6vh;
+    font-size: 0.8em;
+    border-radius: 0.3vh;
+    color: #00385b;
+    border: #00385b 0.15em solid;
+    background-color: #ffffdd;
+    margin: 0.5vh;
+}
 
+select{
+
+    margin: 0 1vh  0 1vh;
+    border-radius: 0.3vh;
+    color: #00385b;
+    border: #00385b 0.15em solid;
+    background-color: #ffffdd;
+}
+
+input{
+    border-radius: 0.3vh;
+    color: #00385b;
+    border: #00385b 0.1em solid;
+}
+table td, table th{
+    padding: 8px 14px ;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+th{
+    font-size: 1.2em;
+}
+
+.nomsortie{
+    text-align: start;
+
+}
 nav{
     margin: 0 4vh 2vh 4vh;}
 
