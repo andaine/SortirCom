@@ -67,8 +67,12 @@ class ParticipantType extends AbstractType
                     return $er -> createQueryBuilder('s') -> orderBy('s.nom', 'ASC'); //fonction anonyme qui tri les séries par ordre alphabétiques
                 }
             ])
-            ->add('enregistrer', SubmitType::class,['label' =>'Enregistrer'])
-            ->add('annuler', SubmitType::class, ['label' =>'Annuler'])
+            ->add('enregistrer', SubmitType::class,[
+                'label' =>'Enregistrer'
+            ])
+            ->add('annuler', SubmitType::class, [
+                'label' =>'Annuler'
+            ])
 
 //            ->add('administrateur')
 //            ->add('actif')
