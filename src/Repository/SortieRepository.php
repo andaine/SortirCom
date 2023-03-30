@@ -125,7 +125,7 @@ class SortieRepository extends ServiceEntityRepository
 
         if (!empty($filtre->sortiePassee)){
             $query = $query
-                ->andWhere('sorties.dateHeureDebut > :dateJour')
+                ->andWhere('sorties.dateHeureDebut < :dateJour')
                 ->setParameter('dateJour', $dateJour);
         }
 

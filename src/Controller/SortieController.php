@@ -26,7 +26,7 @@ class SortieController extends AbstractController
         $filtre = new filtre();
 
         $userConnecte = $this->getUser();//->getId();
-        dump($userConnecte);
+
         $sortieForm = $this->createForm(FiltreType::class, $filtre);
         $sortieForm->handleRequest($req);
 
