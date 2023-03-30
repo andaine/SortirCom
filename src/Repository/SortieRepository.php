@@ -2,8 +2,10 @@
 
 namespace App\Repository;
 
+use App\Class\filtre;
 use App\Entity\Sortie;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -63,4 +65,34 @@ class SortieRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+//    public function filtre($idSite){
+//
+//        // filtre sur site
+//
+//        $queryBuilder = $this->createQueryBuilder('s');
+//
+//
+//        $queryBuilder -> andWhere('s.site');
+//    }
+    public function findByFiltre(filtre $filtre) {
+        $query = $this
+            ->createQueryBuilder('s')
+            ->select('site','s')
+            ->join('s.site','site');
+
+        if (!empty($filtre->q)){
+            $query = $query
+                ->andWhere('s.site like :q')
+                ->setParameter('q', "%{$filtre->q}%");
+        }
+
+        $query = $query->getQuery();
+
+        $paginator = new Paginator($query);
+        return $paginator;
+
+    }
+
+
 }

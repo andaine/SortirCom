@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Class\filtre;
 use App\Entity\Etat;
 use App\Entity\Inscription;
 use App\Entity\Sortie;
@@ -19,11 +20,17 @@ use Symfony\Component\Routing\Annotation\Route;
 class SortieController extends AbstractController
 {
     #[Route('/sorties', name: 'sorties')]
-    public function afficherToutesSorties(SortieRepository $sortieRepository): Response
+    public function afficherToutesSorties(SortieRepository $sortieRepository, Request $req): Response
     {
-        $sortieForm = $this->createForm(FiltreType::class);
+        //Créer une instance de filtre
+        $filtre = new filtre();
 
-        $sorties = $sortieRepository->findBy(['etat' => [1, 2, 3, 4]]);
+        $sortieForm = $this->createForm(FiltreType::class, $filtre);
+        $sortieForm->handleRequest($req);
+
+        $sorties = $sortieRepository->findByFiltre($filtre);
+
+        //$sorties = $sortieRepository->findBy(['etat' => [1, 2, 3, 4]]);
 
         return $this->render('sortie/sorties.html.twig', [
             'controller_name' => 'SortieController',
@@ -171,7 +178,6 @@ class SortieController extends AbstractController
         $this->addFlash("success", "Sortie Annulée ! ");
         return $this->redirectToRoute("sorties");
     }
-
 
 
 

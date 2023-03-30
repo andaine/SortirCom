@@ -4,7 +4,7 @@ namespace App\Form;
 
 use App\Class\filtre;
 use App\Entity\Site;
-use Doctrine\ORM\EntityRepository;
+use App\Repository\SiteRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -22,20 +22,27 @@ class FiltreType extends AbstractType
             ->add('site', EntityType::class, [
                 'class' => Site::class,
                 'choice_label' => 'nom',
-                'query_builder' => function (EntityRepository $er) {
-                    return $er -> createQueryBuilder('s') -> orderBy('s.nom', 'ASC'); //fonction anonyme qui tri les sites par ordre alphabétiques
-                }
+                'query_builder' => function (SiteRepository $sr) {
+                    return $sr -> createQueryBuilder('s') -> orderBy('s.nom', 'ASC'); //fonction anonyme qui tri les sites par ordre alphabétique
+                },
+                'required' => false
             ])
             ->add('global', TextType::class, [
-                'label' => 'Le nom de la sortie contient'
+                'label' => 'Le nom de la sortie contient',
+                'required' => false,
+                'attr' => [
+                    'placeholder' => 'Rechercher'
+    ]
             ])
             ->add('dateDebut', DateType::class,[
                 'html5' => true,
-                'widget' => 'single_text'
+                'widget' => 'single_text',
+                'required' => false
             ])
             ->add('dateFin', DateType::class,[
                 'html5' => true,
-                'widget' => 'single_text'
+                'widget' => 'single_text',
+                'required' => false
             ])
             ->add('organisateur',CheckboxType::class, [
                 'label'    => 'Sorties dont je suis l\'organisateur',
@@ -54,7 +61,7 @@ class FiltreType extends AbstractType
                 'required' => false
             ])
             ->add('rechercher', SubmitType::class, [
-                'label' => 'Rechercher',
+                'label' => 'Rechercher'
 
             ])
         ;
