@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Etat;
 use App\Entity\Inscription;
 use App\Entity\Sortie;
+use App\Form\FiltreType;
 use App\Form\SortieType;
 use App\Repository\EtatRepository;
 use App\Repository\ParticipantRepository;
@@ -20,12 +21,14 @@ class SortieController extends AbstractController
     #[Route('/sorties', name: 'sorties')]
     public function afficherToutesSorties(SortieRepository $sortieRepository): Response
     {
+        $sortieForm = $this->createForm(FiltreType::class);
 
         $sorties = $sortieRepository->findBy(['etat' => [1, 2, 3, 4]]);
 
         return $this->render('sortie/sorties.html.twig', [
             'controller_name' => 'SortieController',
-            "sorties" => $sorties
+            "sorties" => $sorties,
+            'filtreForm' => $sortieForm
         ]);
     }
 
