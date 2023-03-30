@@ -9,8 +9,9 @@
 <nav>
     <a href="{{ path('sorties') }}">Accueil</a>
     <a href="{{ path('nouvelle_sortie') }}">Proposer une sortie</a>
-{#    <a href="{{ path('user_monProfil', {'id'->getUser($id)} }}">Mon profil</a>#}
-
+    {% if app.user %}
+        <a href="{{ path('user_monProfil', {'id' : app.user.id})}}">Mon profil</a>
+    {% endif %}
 </nav>
 
 </header>

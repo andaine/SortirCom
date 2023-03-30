@@ -7,8 +7,13 @@
 
     <h3>Listes des sorties : </h3>
 
+    <h4>Filtrer les sorties</h4>
+    {{ form_start(filtreForm) }}
 
-    {# TODO ajouter un systeme de liste pour afficher mes sortie en BDD #}
+    {{ form_end(filtreForm) }}
+
+
+
 
     {% for sortie in sorties %}
 
