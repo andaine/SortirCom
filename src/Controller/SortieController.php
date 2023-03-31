@@ -9,6 +9,7 @@ use App\Entity\Sortie;
 use App\Form\FiltreType;
 use App\Form\SortieType;
 use App\Repository\EtatRepository;
+use App\Repository\InscriptionRepository;
 use App\Repository\ParticipantRepository;
 use App\Repository\SortieRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -32,7 +33,6 @@ class SortieController extends AbstractController
 
         $sorties = $sortieRepository->findByFiltre($filtre,$userConnecte);
 
-        //$sorties = $sortieRepository->findBy(['etat' => [1, 2, 3, 4]]);
 
         return $this->render('sortie/sorties.html.twig', [
             'controller_name' => 'SortieController',
@@ -129,22 +129,41 @@ class SortieController extends AbstractController
         public function participer(EntityManagerInterface $entityManager,
                                    ParticipantRepository $participantRepository,
                                    SortieRepository $sortieRepository,
+                                   InscriptionRepository $inscriptionRepository,
                                    $idsortie,
                                    Request $request): Response
         {
+
+            //je dois récuperer l'user connecter & la sortie selectionner
             $user = $this->getUser();
             $sortie = $sortieRepository->find($idsortie);
 
-            $inscription = new Inscription();
-            $inscription->setParticipant($user);
-            $inscription->setSortie($sortie);
-            $inscription->setDate(new \DateTime('now'));
+            //chercher en BDD si l'inscription existe sur l'user_id et la sortie_id
+            $inscription = $inscriptionRepository->findBy(['participant'=>$user, 'sortie'=>$sortie]);
 
-            $entityManager->persist($inscription);
-            $entityManager->flush();
 
-            $this->addFlash("success", "participation ajouter ! ");
+            if ($inscription ==  null){
+                $inscription = new Inscription();
+                $inscription->setParticipant($user);
+                $inscription->setSortie($sortie);
+                $inscription->setDate(new \DateTime('now'));
+                $entityManager->persist($inscription);
+                $entityManager->flush();
+                $this->addFlash("success", "participation ajouter ! ");
             return $this->redirectToRoute('sorties');
+            }
+
+            $this->addFlash("warning", "Participant déja inscrit ! ");
+            return $this->redirectToRoute('sorties');
+
+
+            //si ça n'existe pas je peux crée une participation.
+          //  $inscription = new Inscription();
+
+
+
+
+
         }
 
 
