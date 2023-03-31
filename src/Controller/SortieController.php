@@ -156,15 +156,34 @@ class SortieController extends AbstractController
             $this->addFlash("warning", "Participant déja inscrit ! ");
             return $this->redirectToRoute('sorties');
 
-
-            //si ça n'existe pas je peux crée une participation.
-          //  $inscription = new Inscription();
-
-
-
-
-
         }
+
+    #[Route('seDesister/{idsortie}', name: 'desister')]
+    public function seDesister(EntityManagerInterface $entityManager,
+                               ParticipantRepository $participantRepository,
+                               SortieRepository $sortieRepository,
+                               InscriptionRepository $inscriptionRepository,
+                                                      $idsortie,
+                               Request $request): Response
+    {
+
+        // récupérer l'utilisateur connecté et la sortie sélectionnée
+        $user = $this->getUser();
+        $sortie = $sortieRepository->find($idsortie);
+
+        // récupérer l'inscription de l'utilisateur pour la sortie
+        $inscription = $inscriptionRepository->findOneBy(['participant'=>$user, 'sortie'=>$sortie]);
+
+        if ($inscription !== null) {
+            $entityManager->remove($inscription);
+            $entityManager->flush();
+            $this->addFlash("success", "Désinscription réussie ! ");
+        } else {
+            $this->addFlash("warning", "Participant non inscrit à la sortie ! ");
+        }
+
+        return $this->redirectToRoute('sorties');
+    }
 
 
 

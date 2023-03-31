@@ -40,7 +40,15 @@ class SortieType extends AbstractType
                 'html5'  => true,
                'data'   => new \DateTime()
             ])
-            ->add('nbInscriptionMax')
+            ->add('nbInscriptionMax', IntegerType::class, [
+                'label'       => 'Nombre de participants max. ',
+                'required'    => true,
+                'attr'        => [
+                    'min'      => 1,
+                    'class'    => 'form-control',
+                    'autocomplete' => 'off',
+                ]
+            ])
             ->add('infoSortie',TextareaType::class, [
                 'attr' => [
                     'cols'=>30,

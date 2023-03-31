@@ -36,6 +36,7 @@
                 <td>{{ sortie.etat.libelle }}</td>
                 <td><a href="{{ path('user_monProfil',{'id':sortie.organisateur.id})  }}">{{sortie.organisateur.nom}}</a></td>
                 <td><a href="{{ path('participer',{'idsortie':sortie.id()})}}">participer</a></td>
+
             </tr>
 
         {% endfor %}
