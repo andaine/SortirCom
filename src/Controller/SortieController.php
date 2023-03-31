@@ -25,6 +25,7 @@ class SortieController extends AbstractController
     {
         //Créer une instance de filtre
         $filtre = new filtre();
+        $date = new \DateTime();
 
         $userConnecte = $this->getUser();//->getId();
 
@@ -37,7 +38,8 @@ class SortieController extends AbstractController
         return $this->render('sortie/sorties.html.twig', [
             'controller_name' => 'SortieController',
             "sorties" => $sorties,
-            'filtreForm' => $sortieForm->createView()
+            'filtreForm' => $sortieForm->createView(),
+            'date' => $date
         ]);
     }
 
