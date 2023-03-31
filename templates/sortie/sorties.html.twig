@@ -34,9 +34,12 @@
                 <td>{{ sortie.dateLimiteInscription|date("d/m/Y") }}</td>
                 <td>{{sortie.inscriptions.count}} / {{ sortie.nbInscriptionMax }}</td>
                 <td>{{ sortie.etat.libelle }}</td>
-                <td><a href="{{ path('user_monProfil',{'id':sortie.organisateur.id})  }}">{{sortie.organisateur.nom}}</a></td>
-                <td><a href="{{ path('participer',{'idsortie':sortie.id()})}}">participer</a></td>
-
+                <td>
+{#                    TODO : rajouter condition de lien si le user connecté participe à la sortie concernée#}
+                    <a href="{{ path('user_monProfil',{'id':sortie.organisateur.id})  }}">{{sortie.organisateur.nom}}</a></td>
+                <td> {% if (sortie.dateLimiteInscription > date) and (sortie.etat.id == 2) and (sortie.etat.id == 4)%}
+                    <a href="{{ path('participer',{'idsortie':sortie.id()})}}">participer</a>
+                {% endif %}</td>
             </tr>
 
         {% endfor %}
