@@ -79,6 +79,7 @@ class SortieRepository extends ServiceEntityRepository
         $dateJour = new \DateTime();
         $query = $this
             ->createQueryBuilder('sorties')
+            ->andWhere('sorties.etat in (1,2,3,4)')
             ->select('sites','sorties')
             ->join('sorties.site','sites'); //sorties.site correspond au champ "site" de sorties
 
