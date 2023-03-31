@@ -23,7 +23,18 @@ header img{
     font-size: 1.3em;
     background-color: #ffdd24;
     text-align: center;
+}
 
+.flash-error{
+    font-size: 1.3em;
+    background-color: orangered;
+    text-align: center;
+}
+
+.flash-warning{
+    font-size: 1.3em;
+    background-color: orange;
+    text-align: center;
 }
 
 table{
@@ -94,7 +105,7 @@ th{
 
 }
 nav{
-    margin: 0vh 4vh 2vh 4vh;
+    margin: 0 4vh 2vh 4vh;
 }
 
 header {
@@ -118,6 +129,7 @@ main{
     margin: 0 5vh 0 5vh;
     background-color: rgb(255,255,240,0.9);
     min-height: 48vh;
+    box-shadow: 5px 5px 15px 0 rgba(0,0,0,0.3);
 }
 
 body{
