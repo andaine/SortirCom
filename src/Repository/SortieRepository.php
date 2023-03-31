@@ -120,9 +120,9 @@ class SortieRepository extends ServiceEntityRepository
 //        ne fonctionne pas
         if (!empty($filtre->pasInscrit)){
             $query = $query
-                ->join('sorties.inscriptions','sortieIns')
-                ->andWhere('sortieIns.participant != :pasInscrit')
-                ->setParameter('pasInscrit', $userConnecte);
+                ->leftJoin('sorties.inscriptions', 'inscriptions', 'WITH', 'inscriptions.participant = :participant')
+                ->andWhere('inscriptions.id IS NULL')
+                ->setParameter('participant', $userConnecte);
         }
 
         if (!empty($filtre->sortiePassee)){
