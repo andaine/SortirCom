@@ -48,10 +48,12 @@ a{
 nav a{
     padding:0.5vh 1.6vh 0.5vh 1.6vh;
     font-size: 1.1em;
-    border-radius: 0.3vh;
+
     color: #00385b;
-    border: #00385b solid;
-    background-color: #ffffdd;
+    margin: 1vh;
+    border-bottom:#00385b solid 4px;
+    background-color: rgba(255,255,221) ;
+
 }
 button{
     padding:0.5vh 1.6vh 0.5vh 1.6vh;
@@ -92,31 +94,49 @@ th{
 
 }
 nav{
-    margin: 0 4vh 2vh 4vh;}
+    margin: 0vh 4vh 2vh 4vh;
+}
 
-header{
+header {
     display: flex;
     align-items: center;
     font-size: 2em;
     color: #458d34;
-    margin: 0 4vh 0 4vh;
+    padding: 2vh 4vh 0 8vh;
+    background-color: rgba(255,255,221) ;
+    border-bottom:#00385b solid 4px;
 }
 
+
+/*
+.entete{ background-color : rgba(255,255,221,0.9);}
+*/
 main{
 
-    padding: 3vh;
+    padding: 4vh;
     border-radius: 1.2vh;
+    margin: 0 5vh 0 5vh;
+    background-color: rgb(255,255,240,0.9);
+    min-height: 48vh;
 }
 
 body{
-    background-image: radial-gradient( circle 400px at 6.8% 8.3%,  rgba(255,244,169,1) 0%, rgba(255,244,234,1) 100.2% );
+   /* background-image: radial-gradient( circle 400px at 6.8% 8.3%,  rgba(255,244,169,1) 0%, rgba(255,244,234,1) 100.2% );
+   */
+
     font-family: 'Cantarell', sans-serif;
+    background-image: url("../img/fond1.png");
+    margin: -1.2vh;
 
 }
 
 footer{
     margin-top: 5vh;
-text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 3vh;
+    text-align: center;
+    background-color : rgba(255,255,221,0.9);
 }
 
 .recherche{
