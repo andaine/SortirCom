@@ -24,7 +24,8 @@
         <h3>Liste des participants :</h3>
         <ul>
             {% for inscription in sortie.inscriptions %}
-                <li>{{ inscription.participant.pseudo }}</li>
+{#                TODO : rajouter condition de lien si le user connecté participe à la sortie concernée#}
+                <li><a href="{{ path('user_monProfil',{'id':inscription.participant.id})  }}"> {{inscription.participant.prenom}} {{inscription.participant.nom}}</a></li>
             {% endfor %}
         </ul>
     {% endif %}
