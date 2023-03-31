@@ -10,7 +10,9 @@
         <a href="{{ path('sorties') }}">Accueil</a>
         {% if app.user %}
             <a href="{{ path('user_monProfil', {'id' : app.user.id})}}">Mon profil</a>
+            <a href="{{ path('nouvelle_sortie') }}">Ajouter une sortie</a>
+            <a href="{{ path('app_logout', {'id' : app.user.id})}}">Logout</a>
         {% endif %}
-        <a href="{{ path('nouvelle_sortie') }}">Ajouter une sortie</a>
+
     </nav>
 </div>

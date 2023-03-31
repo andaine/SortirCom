@@ -39,7 +39,8 @@ class SortieController extends AbstractController
             'controller_name' => 'SortieController',
             "sorties" => $sorties,
             'filtreForm' => $sortieForm->createView(),
-            'date' => $date
+            'date' => $date,
+            'userConnecte' =>$userConnecte
         ]);
     }
 

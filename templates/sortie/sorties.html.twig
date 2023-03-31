@@ -38,9 +38,11 @@
 {#                    TODO : rajouter condition de lien si le user connecté participe à la sortie concernée#}
                     <a href="{{ path('user_monProfil',{'id':sortie.organisateur.id})  }}">{{sortie.organisateur.nom}}</a></td>
                 <td> {% if (sortie.dateLimiteInscription > date) and (sortie.etat.id == 2) and (sortie.etat.id == 4)%}
-                    <a href="{{ path('participer',{'idsortie':sortie.id()})}}">participer</a>
-                        <a href="{{ path('desister',{'idsortie':sortie.id()})}}">desister</a>
-                {% endif %}</td>
+                        <a href="{{ path('participer',{'idsortie':sortie.id()})}}">Participer</a>
+                    {% endif %}</td>
+                <td> {% if (sortie.dateHeureDebut > date) and (sortie.inscriptions.contains(app.user))%}
+                        <a href="{{ path('desister',{'idsortie':sortie.id()})}}">Se désister</a>
+                    {% endif %}</td>
             </tr>
 
         {% endfor %}
