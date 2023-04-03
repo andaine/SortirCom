@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Class\filtre;
-use App\Entity\Etat;
 use App\Entity\Inscription;
 use App\Entity\Sortie;
 use App\Form\FiltreType;
@@ -104,7 +103,6 @@ class SortieController extends AbstractController
         $sortieForm = $this->createForm(SortieType::class, $sortie);
 
         $sortieForm->handleRequest($request);
-        $modificationAutre = false;
 
         if ($request->get('publier') == 'publier') {
             return $this->publierSortie($id, $sortieRepository, $entityManager, $etatRepository);
@@ -114,7 +112,7 @@ class SortieController extends AbstractController
 
         if ($sortieForm->isSubmitted() && $sortieForm->isValid()) {
             $entityManager->flush();
-            $this->addFlash("success", "Sortie Modifié ! ");
+            $this->addFlash("success", "Sortie modifiée ! ");
             return $this->redirectToRoute('sorties');
         }
 
@@ -131,11 +129,10 @@ class SortieController extends AbstractController
                                    ParticipantRepository $participantRepository,
                                    SortieRepository $sortieRepository,
                                    InscriptionRepository $inscriptionRepository,
-                                   $idsortie,
-                                   Request $request): Response
+                                   $idsortie) : Response
         {
 
-            //je dois récuperer l'user connecter & la sortie selectionner
+            //je dois récuperer l'user connecté & la sortie sélectionnée
             $user = $this->getUser();
             $sortie = $sortieRepository->find($idsortie);
 
@@ -150,7 +147,7 @@ class SortieController extends AbstractController
                 $inscription->setDate(new \DateTime('now'));
                 $entityManager->persist($inscription);
                 $entityManager->flush();
-                $this->addFlash("success", "participation ajouter ! ");
+                $this->addFlash("success", "Participation ajoutée ! ");
             return $this->redirectToRoute('sorties');
             }
 
@@ -164,8 +161,7 @@ class SortieController extends AbstractController
                                ParticipantRepository $participantRepository,
                                SortieRepository $sortieRepository,
                                InscriptionRepository $inscriptionRepository,
-                                                      $idsortie,
-                               Request $request): Response
+                                                      $idsortie): Response
     {
 
         // récupérer l'utilisateur connecté et la sortie sélectionnée
