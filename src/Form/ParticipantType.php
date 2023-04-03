@@ -7,10 +7,13 @@ use App\Entity\Site;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Validator\Constraints\Image;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
@@ -67,6 +70,27 @@ class ParticipantType extends AbstractType
                     return $er -> createQueryBuilder('s') -> orderBy('s.nom', 'ASC'); //fonction anonyme qui tri les séries par ordre alphabétiques
                 }
             ])
+
+            ->add('photo', FileType::class,[
+                'label' => 'Chargez ici votre photo de profil',
+                'required' => true,
+                'mapped' => false,
+                'constraints' => [
+                    new Image([
+                        'maxSize' => '1024k',
+                        'minWidth'=> '80',
+                        'maxWidth'=> '120',
+                        'minHeight'=> '80',
+                        'maxHeight'=> '120',
+                        'mimeTypes' => [
+                            'image/jpeg',
+                            'image/png',
+                        ],
+                        'mimeTypesMessage' => 'Please upload a valid JPG document',
+                    ])
+                ],
+            ])
+
             ->add('enregistrer', SubmitType::class,[
                 'label' =>'Enregistrer'
             ])
