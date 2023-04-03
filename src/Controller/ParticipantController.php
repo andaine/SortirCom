@@ -2,12 +2,10 @@
 
 namespace App\Controller;
 
-use App\Entity\Participant;
 use App\Form\ParticipantType;
 use App\Repository\ParticipantRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\Exception\LogicException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -20,7 +18,6 @@ class ParticipantController extends AbstractController
     public function modifierProfil(UserPasswordHasherInterface $userPasswordHasher, Request $req, ParticipantRepository $pr, $id, EntityManagerInterface $em): Response
     {
         $user = $pr->find($id);
-        $user->setPassword('');
         $userForm = $this->createForm(ParticipantType::class, $user);
         $userForm->handleRequest($req);
 
@@ -39,7 +36,6 @@ class ParticipantController extends AbstractController
                     return $this->redirectToRoute('user_monProfil',['id'=> $user->getId()]);
                 }
             } else {
-                //throw new \LogicException('Les 2 passwords sont différents');
                 $this->addFlash('error', 'Les 2 mots de passe doivent être identiques');
                 return $this->redirectToRoute('user_monProfil',['id'=> $user->getId()]);
             }
@@ -64,8 +60,5 @@ class ParticipantController extends AbstractController
             'user'=>$user
         ]);
     }
-
-
-
 
 }

@@ -28,7 +28,7 @@ class ParticipantType extends AbstractType
             ->add('password' , PasswordType::class, [
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
-                'mapped' => false,              //pour hasher le pwd en bdd
+                'mapped' => false,              //car on va hasher le pwd en bdd
                 'attr' => ['autocomplete' => 'new-password'],
                 'constraints' => [
                     new NotBlank([
@@ -46,7 +46,7 @@ class ParticipantType extends AbstractType
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
                 'label' => 'Confirmation',
-                'mapped' => false,              //pour hasher le pwd en bdd
+                'mapped' => false,              //car on va hasher le pwd en bdd
                 'attr' => ['autocomplete' => 'new-password'],
                 'constraints' => [
                     new NotBlank([
