@@ -30,7 +30,9 @@
         </ul>
     {% endif %}
 
+    {% if (sortie.organisateur == app.user) and (sortie.etat.id == 1)%}
     <a href="{{ path('modifier_sortie',{'id':sortie.id()}) }}"><button>Modifier Sortie</button></a>
+    {% endif %}
 
 {% endblock %}
 
