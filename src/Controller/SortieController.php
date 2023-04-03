@@ -14,6 +14,8 @@ use App\Repository\ParticipantRepository;
 use App\Repository\SortieRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -110,10 +112,6 @@ class SortieController extends AbstractController
 
         }
 
-        if ($request->get('supprimer') == 'supprimer') {
-           return $this->supprimerSortie($id, $sortieRepository, $entityManager, $etatRepository);
-        }
-
         if ($sortieForm->isSubmitted() && $sortieForm->isValid()) {
             $entityManager->flush();
             $this->addFlash("success", "Sortie Modifié ! ");
@@ -203,19 +201,40 @@ class SortieController extends AbstractController
         return $this->redirectToRoute("sorties");
     }
 
-    public function supprimerSortie(int                    $id,
-                                    SortieRepository       $sortieRepository,
-                                    EntityManagerInterface $entityManager,
-                                    EtatRepository         $etatRepository): Response
+
+    #[Route('/annulersortie/{id}', name: 'annuler_sortie')]
+    public function annulerSortie(int $id, SortieRepository $sortieRepository, Request $request, EntityManagerInterface $entityManager, EtatRepository $etatRepository): Response
     {
         $sortie = $sortieRepository->find($id);
-        $etat = $etatRepository->find(6);
-        $sortie->setEtat($etat);
-        $entityManager->flush();
-        $this->addFlash("success", "Sortie Annulée ! ");
-        return $this->redirectToRoute("sorties");
-    }
+        $sortieForm = $this->createFormBuilder($sortie)
+            ->add('infoSortie', TextareaType::class, [
+                'label' => 'Motif d\'annulation',
+                'required' => true,
+                'attr' => ['rows' => 4],
+            ])
+            ->add('valider', SubmitType::class, [
+                'label' => 'Annuler la sortie',
+                'attr' => ['class' => 'btn btn-danger'],
+            ])
+            ->getForm();
 
+        $sortieForm->handleRequest($request);
+
+        if ($sortieForm->isSubmitted() && $sortieForm->isValid()) {
+
+            $sortie->setInfoSortie($sortieForm->get('infoSortie')->getData());
+            $etat = $etatRepository->find(6);
+            $sortie->setEtat($etat);
+            $entityManager->flush();
+            $this->addFlash('success', 'Sortie annulée !');
+            return $this->redirectToRoute('sorties');
+        }
+
+        return $this->render('sortie/annulersortie.html.twig', [
+            'sortieForm' => $sortieForm->createView(),
+            'sortie' => $sortie,
+        ]);
+    }
 
 
 }

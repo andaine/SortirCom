@@ -23,18 +23,24 @@ header img{
     font-size: 1.3em;
     background-color: #ffdd24;
     text-align: center;
+    margin-top: 1vh;
+    margin-bottom: 1vh;
 }
 
 .flash-error{
     font-size: 1.3em;
     background-color: orangered;
     text-align: center;
+    margin-top: 1vh;
+    margin-bottom: 1vh;
 }
 
 .flash-warning{
     font-size: 1.3em;
     background-color: orange;
     text-align: center;
+    margin-top: 1vh;
+    margin-bottom: 1vh;
 }
 
 table{
