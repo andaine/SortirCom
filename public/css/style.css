@@ -1,22 +1,20 @@
+
 h1,h2,h3,h4,h5,h6{
     font-family: 'Exo', sans-serif;
 }
 header img{
-    max-height: 100px;
-    width: auto;
+    max-height: 150px;
 
+}
+.titresortiedetail{
+    text-align: center;
+    font-size:xx-large;
+    margin-bottom: 5vh;
 }
 
 .sortiestyle{
     display: flex;
     justify-content: flex-start;
-}
-
-.sorticard{
-    background-color: #ffffdd;
-    border: #2e3136 solid ;
-    padding: 1vh;
-    border: 1.2vh;
 }
 
 .flash-success{
@@ -63,15 +61,21 @@ a{
 
 }
 nav a{
-    padding:0.5vh 1.6vh 0.5vh 1.6vh;
-    font-size: 1.1em;
-
-    color: #00385b;
-    margin: 1vh;
-    border-bottom:#00385b solid 4px;
-    background-color: rgba(255,255,221) ;
-
+    font-size: 1.35em;
+    color: #1F3C7C;
+    margin-left: 2vh;
+    padding: 0.5vh;
 }
+
+nav a:hover{
+    font-size: 1.45em;
+}
+
+a:hover{
+    font-size: 1.2em;
+}
+
+
 button{
     padding:0.5vh 1.6vh 0.5vh 1.6vh;
     font-size: 0.8em;
@@ -111,7 +115,9 @@ th{
 
 }
 nav{
-    margin: 0 4vh 2vh 4vh;
+    margin-right: 4vh;
+    display: flex;
+    align-items: center;
 }
 
 header {
@@ -119,9 +125,12 @@ header {
     align-items: center;
     font-size: 2em;
     color: #458d34;
-    padding: 2vh 4vh 0 8vh;
-    background-color: rgba(255,255,221) ;
-    border-bottom:#00385b solid 4px;
+    padding: 2.4vh;
+    background-color: rgba(255,255,255, 0.8) ;
+    border-radius: 0 0 1.2vh 0;
+    margin-bottom: 2vh;
+    max-height: 210px;
+
 }
 
 
@@ -133,28 +142,35 @@ main{
     padding: 4vh;
     border-radius: 1.2vh;
     margin: 0 5vh 0 5vh;
-    background-color: rgb(255,255,240,0.9);
+    background-color: rgba(255,255,255, 0.8) ;
     min-height: 48vh;
     box-shadow: 5px 5px 15px 0 rgba(0,0,0,0.3);
 }
+*{
+    margin: 0;
 
+}
 body{
-   /* background-image: radial-gradient( circle 400px at 6.8% 8.3%,  rgba(255,244,169,1) 0%, rgba(255,244,234,1) 100.2% );
-   */
+    /* background-image: radial-gradient( circle 400px at 6.8% 8.3%,  rgba(255,244,169,1) 0%, rgba(255,244,234,1) 100.2% );
+    */
 
     font-family: 'Cantarell', sans-serif;
     background-image: url("../img/fond1.png");
-    margin: -1.2vh;
+
 
 }
-
+footer a{
+    color: #1F3C7C;
+}
 footer{
     margin-top: 5vh;
     margin-left: auto;
     margin-right: auto;
     padding: 3vh;
     text-align: center;
-    background-color : rgba(255,255,221,0.9);
+    background-color: rgba(255,255,255, 0.7) ;
+    color: #1F3C7C;
+
 }
 
 .recherche{
@@ -162,3 +178,28 @@ footer{
     justify-content: flex-start;
 }
 
+
+.entete{
+    display: flex;
+    justify-content: space-between;
+}
+.sortiedetailhaut{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    font-size: large;
+}
+
+.descriptionsortie{
+    max-width:40vh;
+    overflow-wrap: break-word;
+}
+
+
+.sortiedetailbas{
+    margin-top: 3vh;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+}

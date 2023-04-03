@@ -1,42 +1,60 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    <h2 class="titresortiedetail">{{sortie.nom }}</h2>
 
-    <h2>{{sortie.nom }}</h2>
-    <div>Date de la sortie : {{ sortie.dateHeureDebut|date("d/m/Y H:i") }}</div>
-    <div>Cloture des inscriptions :{{ sortie.dateLimiteInscription|date("d/m/Y") }}</div>
-    <div>Nombre de Place : {{sortie.nbInscriptionMax }}</div>
-    <div>Durée : {{ sortie.duree}} minutes</div>
-    <div>{{ sortie.infoSortie }}</div>
+    <div class="sortiedetailhaut">
+        <div class="colonelibelle">
+            <div><strong>Date de la sortie :</strong> </div>
+            <div><strong>Clôture des inscriptions :</strong> </div>
+            <div><strong>Nombre de place :</strong></div>
+            <div><strong>Durée :</strong></div>
+            <div class="descriptionsortie"><strong>Description :</strong></div>
+            <br>
+        </div>
+        <div class="colonereponse">
+            <div> {{ sortie.dateHeureDebut|date("d/m/Y H:i") }}</div>
+            <div> {{ sortie.dateLimiteInscription|date("d/m/Y") }}</div>
+            <div> {{sortie.nbInscriptionMax }}</div>
+            <div> {{ sortie.duree}} minutes</div>
+            <div> {{ sortie.infoSortie }}</div>
+        </div>
+    <div></div>
+        <div class="colonelibelle">
+            <div><strong>Lieu :</strong></div>
+            <div><strong>Rue :</strong></div>
+            <div><strong>Ville :</strong></div>
+            <div><strong>Code postal :</strong></div>
+            <div><strong>Latitude :</strong> </div>
+            <div><strong>Longitude :</strong></div>
+        </div>
+        <div class="colonereponse">
+            <div> {{ sortie.lieu.nom }}</div>
+            <div> {{ sortie.lieu.rue}}</div>
+            <div> {{ sortie.lieu.ville.nom }}</div>
+            <div> {{ sortie.lieu.ville.codePostal}}</div>
+            <div> {{ sortie.lieu.latitude }}</div>
+            <div> {{ sortie.lieu.longitude }}</div>
+        </div>
+    </div>
 
-    <div>Lieu : {{ sortie.lieu.nom }}</div>
-    <div>Rue : {{ sortie.lieu.rue}}</div>
-    <div>Ville : {{ sortie.lieu.ville.nom }}</div>
-    <div>Code Postal : {{ sortie.lieu.ville.codePostal}}</div>
+    <div class="sortiedetailbas">
+        {% if sortie.inscriptions is empty %}
+            <p>Aucun participant n'est inscrit pour cette sortie.</p>
+        {% else %}
+            <div>
+                <h3>Liste des participants :</h3>
+                <ul>
+                    {% for inscription in sortie.inscriptions %}
+                        {#                TODO : rajouter condition de lien si le user connecté participe à la sortie concernée#}
+                        <li><a href="{{ path('user_monProfil',{'id':inscription.participant.id})  }}"> {{inscription.participant.prenom}} {{inscription.participant.nom}}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
 
-    <div>Latitude : {{ sortie.lieu.latitude }}</div>
-    <div>Longitude : {{ sortie.lieu.longitude }}</div>
-
-
-    {% if sortie.inscriptions is empty %}
-        <p>Aucun participant n'est inscrit pour cette sortie.</p>
-    {% else %}
-        <h3>Liste des participants :</h3>
-        <ul>
-            {% for inscription in sortie.inscriptions %}
-{#                TODO : rajouter condition de lien si le user connecté participe à la sortie concernée#}
-                <li><a href="{{ path('user_monProfil',{'id':inscription.participant.id})  }}"> {{inscription.participant.prenom}} {{inscription.participant.nom}}</a></li>
-            {% endfor %}
-        </ul>
-    {% endif %}
-
-    {% if (sortie.organisateur == app.user) and (sortie.etat.id == 1)%}
-    <a href="{{ path('modifier_sortie',{'id':sortie.id()}) }}"><button>Modifier Sortie</button></a>
-    {% endif %}
-
+        {% if (sortie.organisateur == app.user) and (sortie.etat.id == 1)%}
+            <a href="{{ path('modifier_sortie',{'id':sortie.id()}) }}"><button>Modifier Sortie</button></a>
+        {% endif %}
+    </div>
 {% endblock %}
-
-{% block title %}
-
-{% endblock %}
-
