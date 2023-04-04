@@ -37,28 +37,39 @@
                     <td>
                         <a href="{{ path('user_monProfil',{'id':sortie.organisateur.id}) }}">{{ sortie.organisateur.nom }}</a>
                     </td>
+
                     {% set inscrit = false %}
+                    {% set separator = '' %}
+
                     {% for inscription in sortie.inscriptions %}
                         {% if inscription.participant == app.user %}
                             {% set inscrit = true %}
                         {% endif %}
                     {% endfor %}
-                    <td>{% if (sortie.etat.id == 2) and inscrit == false %}
+
+                    <td>
+                        {% if (sortie.etat.id == 2) and inscrit == false %}
                             <a href="{{ path('participer',{'idsortie':sortie.id()}) }}">Participer</a>
+                            {% set separator = '-' %}
                         {% endif %}
 
-                    {% if (inscrit == true) and (sortie.etat.id == 2 or sortie.etat.id == 3) %}
+                        {% if (inscrit == true) and (sortie.etat.id == 2 or sortie.etat.id == 3) %}
+                            {{ separator }}
                             <a href="{{ path('desister',{'idsortie':sortie.id()}) }}">Se désister</a>
+                            {% set separator = '-' %}
                         {% endif %}
 
-                    {% if (sortie.organisateur == app.user) and (sortie.etat.id == 1) %}
+                        {% if (sortie.organisateur == app.user) and (sortie.etat.id == 1) %}
+                            {{ separator }}
                             <a href="{{ path('modifier_sortie',{'id':sortie.id()}) }}">Modifier</a>
+                            {% set separator = '-' %}
                         {% endif %}
 
-                    {% if (sortie.organisateur == app.user) and (sortie.etat.id != 4) and (sortie.etat.id != 5) and (sortie.etat.id != 6)%}
+                        {% if (sortie.organisateur == app.user) and (sortie.etat.id != 4) and (sortie.etat.id != 5) and (sortie.etat.id != 6)%}
+                            {{ separator }}
                             <a href="{{ path('annuler_sortie',{'id':sortie.id()}) }}">Annuler</a>
-                        {% endif %}</td>
-
+                        {% endif %}
+                    </td>
                 </tr>
 
             {% endfor %}
