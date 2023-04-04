@@ -360,7 +360,8 @@ input[type="password"] {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 2rem;
+    border: #448E36 5px solid;
+    padding: 2vh   ;
 
 }
 

@@ -6,7 +6,10 @@
 {% endblock %}
 
 {% block body %}
+
+
         <div class="sortie-form">
+            <h1>{% if sortieForm.nom.vars.value is empty %}Nouvelle{% else %}Modifier{% endif %} Sortie</h1>
             {{ form_start(sortieForm) }}
             <div class="form-group">
                 {{ form_label(sortieForm.nom) }}
