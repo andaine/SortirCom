@@ -4,19 +4,43 @@
 
 {% block body %}
 
-    <h2>{{ user.pseudo }}</h2>
-    <img class="imgUser" src="{{ asset('img/Photos/'~user.image) }}" alt="">
-    Prénom : {{ user.prenom }}<br>
-    Nom : {{ user.nom }}<br>
-    Téléphone : {{ user.telephone }}
-    Email : {{ user.email }}<br>
-    Site de rattachement : {{ user.site.nom }}<br>
+    <div class="profiluser">
+        <div class="enteteuser">
+            <img class="imgUser" src="{{ asset('img/Photos/'~user.image) }}" alt="">
+            <h2 class="titreprofil">{{ user.pseudo }}</h2>
 
-    {% if (user == app.user) %}
-        <form action="{{ path('user_modifier', {'id' : user.id})}}">
-            <button>Modifier</button>
-        </form>
-    {% endif %}
+        </div>
+        <table>
+            <tr>
+                <th>Prénom :</th>
+                <td>{{ user.prenom }}</td>
+            </tr>
+            <tr>
+                <th>Nom :</th>
+                <td>{{ user.nom }}</td>
+            </tr>
+            <tr>
+                <th>Téléphone :</th>
+                <td>{{ user.telephone }}</td>
+            </tr>
+            <tr>
+                <th>Email :</th>
+                <td>{{ user.email }}</td>
+            </tr>
+            <tr>
+                <th>Site de rattachement :</th>
+                <td>{{ user.site.nom }}</td>
+            </tr>
+        </table>
+
+
+        {% if (user == app.user) %}
+                <form action="{{ path('user_modifier', {'id' : user.id})}}">
+                    <br>
+                    <button>Modifier</button>
+                </form>
+            {% endif %}
+        </div>
 
 {% endblock %}
 
