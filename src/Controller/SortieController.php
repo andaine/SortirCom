@@ -193,7 +193,7 @@ class SortieController extends AbstractController
         $etat = $etatRepository->find(2);
         $sortie->setEtat($etat);
         $entityManager->flush();
-        $this->addFlash("success", "Sortie Publié ! ");
+        $this->addFlash("success", "Sortie publiée ! ");
         return $this->redirectToRoute("sorties");
     }
 
