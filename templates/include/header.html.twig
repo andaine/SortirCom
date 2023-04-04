@@ -6,16 +6,26 @@
 
     </header>
 
-    <nav>
 
-        {% if app.user %}
-            <a href="{{ path('sorties') }}">Accueil</a>
-            <a href="{{ path('user_monProfil', {'id' : app.user.id})}}">Mon profil</a>
-            <a href="{{ path('nouvelle_sortie') }}">Ajouter une sortie</a>
-            <a href="{{ path('app_logout', {'id' : app.user.id})}}">Logout</a>
-        {% else %}
-            <a href="{{ path('app_login') }}">Login</a>
-        {% endif %}
+        <nav>
+            {% if app.user %}
+                <a href="{{ path('sorties') }}">Accueil</a>
+                <div class="dropdown">
+                    <a class="usernav" href="{{ path('user_monProfil', {'id' : app.user.id})}}">
+                        {% if app.user.image %}
+                            <img class="imgUsernav" src="{{ asset('img/Photos/'~app.user.image) }}" alt=""><br>
+                        {% endif %}
+                        Mon profil
+                    </a>
+                    <div class="dropdown-content">
+                        <a href="{{ path('user_modifier', {'id' : app.user.id})}}">Modifier mon profil</a>
+                        <a href="{{ path('app_logout', {'id' : app.user.id}) }}">Déconnexion</a>
+                    </div>
+                </div>
+                <a href="{{ path('nouvelle_sortie') }}">Ajouter une sortie</a>
+            {% else %}
+                <a href="{{ path('app_login') }}">Login</a>
+            {% endif %}
+        </nav>
 
-    </nav>
 </div>
