@@ -77,11 +77,12 @@ class ParticipantType extends AbstractType
                 'mapped' => false,
                 'constraints' => [
                     new Image([
-                        'maxSize' => '1024k',
-                        'minWidth'=> '80',
-                        'maxWidth'=> '120',
-                        'minHeight'=> '80',
-                        'maxHeight'=> '120',
+                        'maxSize' => '8000k',
+                        //'maxSize' => '1024k',
+                       // 'minWidth'=> '80',
+                       // 'maxWidth'=> '120',
+                        //'minHeight'=> '80',
+                       // 'maxHeight'=> '120',
                         'mimeTypes' => [
                             'image/jpeg',
                             'image/png',

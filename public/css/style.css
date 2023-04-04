@@ -221,6 +221,82 @@ font-size: 1em;
     justify-content: space-around;
 }
 
-.detailsortitab{
 
+
+.titreprofil{
+    text-align: center;
+    font-size: 2em;
+}
+
+.profiluser{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.profiluser {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: solid 5px #448E36;
+    padding: 2.3vh;
+}
+
+.enteteuser {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.imgUser {
+
+    max-height: 180px;
+    min-height: 180px;
+    max-width: 180px;
+    min-width: 180px ;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    border: #448E36 5px solid;
+}
+
+.titreprofil {
+    font-size: 28px;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+.infouser {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.infouser > div {
+    margin-bottom: 10px;
+}
+
+
+.infouser button {
+    margin-top: 10px;
+}
+
+.infousertxt p {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.infousertxt label {
+    display: inline-block;
+    margin-right: 20px;
+    font-weight: bold;
+}
+
+.infousertxt #text{
+    display: flex;
+    align-items: end;
 }
