@@ -13,6 +13,9 @@
             <a href="{{ path('user_monProfil', {'id' : app.user.id})}}">Mon profil</a>
             <a href="{{ path('nouvelle_sortie') }}">Ajouter une sortie</a>
             <a href="{{ path('app_logout', {'id' : app.user.id})}}">Logout</a>
+            {% if is_granted('ROLE_ADMIN') %}
+                <a href="{{ path('register') }}" title="Créer user">Créer user</a>
+            {% endif %}
         {% else %}
             <a href="{{ path('app_login') }}">Login</a>
         {% endif %}
