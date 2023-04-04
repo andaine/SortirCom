@@ -1,33 +1,42 @@
 {% extends 'base.html.twig' %}
 
+
 {% block title %}
-{{ parent() }} - Nouvelle Sortie
+    {{ parent() }} - {% if sortieForm.nom.vars.value is empty %}Nouvelle{% else %}Modifier{% endif %} Sortie
 {% endblock %}
 
 {% block body %}
-{{ form_start(sortieForm) }}
-    {{ form_widget(sortieForm) }}
+        <div class="sortie-form">
+            {{ form_start(sortieForm) }}
+            <div class="form-group">
+                {{ form_label(sortieForm.nom) }}
+                {{ form_widget(sortieForm.nom, {'attr': {'placeholder': 'Nom de la sortie'}}) }}
 
-    <button>Enregistrer</button>
+                {{ form_label(sortieForm.dateHeureDebut) }}
+                {{ form_widget(sortieForm.dateHeureDebut, {'attr': {'placeholder': 'Date et heure de la sortie'}}) }}
 
-    <button type="submit" name="publier" value="publier">Publier la sortie</button>
+                {{ form_label(sortieForm.duree) }}
+                {{ form_widget(sortieForm.duree, {'attr': {'placeholder': 'Durée de la sortie'}}) }}
 
+                {{ form_label(sortieForm.dateLimiteInscription) }}
+                {{ form_widget(sortieForm.dateLimiteInscription, {'attr': {'placeholder': 'Date limite d\'inscription'}}) }}
 
-    {{ form_end(sortieForm) }}
+                {{ form_label(sortieForm.nbInscriptionMax) }}
+                {{ form_widget(sortieForm.nbInscriptionMax, {'attr': {'placeholder': 'Nombre de participants max.'}}) }}
 
+                {{ form_label(sortieForm.infoSortie) }}
+                {{ form_widget(sortieForm.infoSortie, {'attr': {'placeholder': 'Description de la sortie'}}) }}
 
+                {{ form_label(sortieForm.lieu) }}
+                {{ form_widget(sortieForm.lieu, {'attr': {'placeholder': 'Lieu de la sortie'}}) }}
+            </div>
 
-    <div id="lieu-info"></div>
-
-
-
-
-
-    <a href="{{ path('sorties') }}"><button>Annuler</button></a>
-
-
-
-
-
+            <div class="form-group text-center">
+                <button class="btn" type="submit">Enregistrer</button>
+                <button class="btn" type="submit" name="publier" value="publier">Publier la sortie</button>
+                <a class="btnannuler" href="{{ path('sorties') }}">Annuler</a>
+            </div>
+            {{ form_end(sortieForm) }}
+        </div>
 {% endblock %}
 
