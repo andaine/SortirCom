@@ -26,8 +26,11 @@ class SortieController extends AbstractController
     {
         //Créer une instance de filtre
         $filtre = new filtre();
+
+        //Création d'une variable avec la date du jour
         $date = new \DateTime();
 
+        //Création d'une variable remontant le user connecté
         $userConnecte = $this->getUser();//->getId();
 
         $sortieForm = $this->createForm(FiltreType::class, $filtre);
@@ -38,7 +41,7 @@ class SortieController extends AbstractController
 
         return $this->render('sortie/sorties.html.twig', [
             'controller_name' => 'SortieController',
-            "sorties" => $sorties,
+            'sorties' => $sorties,
             'filtreForm' => $sortieForm->createView(),
             'date' => $date,
             'userConnecte' =>$userConnecte
@@ -193,7 +196,7 @@ class SortieController extends AbstractController
         $etat = $etatRepository->find(2);
         $sortie->setEtat($etat);
         $entityManager->flush();
-        $this->addFlash("success", "Sortie Publié ! ");
+        $this->addFlash("success", "Sortie publiée ! ");
         return $this->redirectToRoute("sorties");
     }
 
