@@ -1,25 +1,29 @@
 
-h1,h2,h3,h4,h5,h6{
+h1, h2, h3, h4, h5, h6 {
     font-family: 'Exo', sans-serif;
 }
-header img{
+
+header img {
     max-height: 150px;
 
 }
-.titresortiedetail{
+
+.titresortiedetail {
     text-align: center;
-    font-size:xx-large;
+    font-size: xx-large;
     margin-bottom: 5vh;
 }
-a:hover{
+
+a:hover {
     color: #448E36;
 }
-.sortiestyle{
+
+.sortiestyle {
     display: flex;
     justify-content: center;
 }
 
-.flash-success{
+.flash-success {
     font-size: 1.3em;
     background-color: #ffdd24;
     text-align: center;
@@ -27,7 +31,7 @@ a:hover{
     margin-bottom: 1vh;
 }
 
-.flash-error{
+.flash-error {
     font-size: 1.3em;
     background-color: orangered;
     text-align: center;
@@ -35,7 +39,7 @@ a:hover{
     margin-bottom: 1vh;
 }
 
-.flash-warning{
+.flash-warning {
     font-size: 1.3em;
     background-color: orange;
     text-align: center;
@@ -43,22 +47,22 @@ a:hover{
     margin-bottom: 1vh;
 }
 
-a{
+a {
     text-decoration: none;
     color: black;
     font-family: 'Exo', sans-serif;
 
 }
-nav a{
+
+nav a {
     font-size: 1.4em;
     color: #1F3C7C;
     padding: 0.5vh;
 }
 
 
-
-button{
-    padding:0.5vh 1.6vh 0.5vh 1.6vh;
+button {
+    padding: 0.5vh 1.6vh 0.5vh 1.6vh;
     font-size: 0.8em;
     border-radius: 0.3vh;
     color: #00385b;
@@ -67,50 +71,49 @@ button{
     margin: 0.5vh;
 }
 
-select{
+select {
 
-    margin: 0 1vh  0 1vh;
+    margin: 0 1vh 0 1vh;
     border-radius: 0.3vh;
     color: #00385b;
     border: #00385b 0.15em solid;
     background-color: white;
 }
 
-input{
+input {
     border-radius: 0.3vh;
     color: #00385b;
     border: #00385b 0.1em solid;
 }
 
-table td, table th{
-    padding: 8px 14px ;
+table td, table th {
+    padding: 8px 14px;
     text-align: center;
     border-bottom: 1px solid #ddd;
 }
 
 
-.tabinfo table td, th{
-    padding: 8px 14px ;
+.tabinfo table td, th {
+    padding: 8px 14px;
     text-align: center;
 }
 
-.tabinfo td{
-    padding-left: 3vh ;
+.tabinfo td {
+    padding-left: 3vh;
 }
 
 
-
-th{
+th {
     font-size: 1.2em;
 }
 
 
-
-.nomsortie{
+.nomsortie {
     text-align: start;
 
 }
-nav{
+
+nav {
     margin-right: 4vh;
     display: flex;
     align-items: center;
@@ -122,7 +125,7 @@ header {
     font-size: 2em;
     color: #458d34;
     padding: 2.4vh;
-    background-color: rgba(255,255,255, 0.8) ;
+    background-color: rgba(255, 255, 255, 0.8);
     border-radius: 0 0 1.2vh 0;
     margin-bottom: 2vh;
     max-height: 210px;
@@ -133,20 +136,22 @@ header {
 /*
 .entete{ background-color : rgba(255,255,221,0.9);}
 */
-main{
+main {
 
     padding: 4vh;
     border-radius: 1.2vh;
     margin: 0 5vh 0 5vh;
-    background-color: rgba(255,255,255, 0.8) ;
+    background-color: rgba(255, 255, 255, 0.8);
     min-height: 48vh;
-    box-shadow: 5px 5px 15px 0 rgba(0,0,0,0.3);
+    box-shadow: 5px 5px 15px 0 rgba(0, 0, 0, 0.3);
 }
-*{
+
+* {
     margin: 0;
 
 }
-body{
+
+body {
     /* background-image: radial-gradient( circle 400px at 6.8% 8.3%,  rgba(255,244,169,1) 0%, rgba(255,244,234,1) 100.2% );
     */
 
@@ -155,47 +160,51 @@ body{
 
 
 }
-footer a{
+
+footer a {
     color: #1F3C7C;
 }
-footer{
+
+footer {
     margin-top: 5vh;
     margin-left: auto;
     margin-right: auto;
     padding: 3vh;
     text-align: center;
-    background-color: rgba(255,255,255, 0.7) ;
+    background-color: rgba(255, 255, 255, 0.7);
     color: #1F3C7C;
 
 }
 
-.recherche{
+.recherche {
     display: flex;
     justify-content: flex-start;
 }
 
 
-.entete{
+.entete {
     display: flex;
     justify-content: space-between;
 }
-.sortiedetailhaut{
+
+.sortiedetailhaut {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
     margin: 0 10vh 4vh 10vh;
 }
 
-.descriptionsortie{
-    max-width:30vh;
-font-size: 1em;
+.descriptionsortie {
+    max-width: 30vh;
+    font-size: 1em;
 
 }
-.descriptionsortielibelle{
+
+.descriptionsortielibelle {
     vertical-align: top;
 }
 
-.sortiedetailbas{
+.sortiedetailbas {
     margin-top: 3vh;
     display: flex;
     flex-wrap: wrap;
@@ -203,13 +212,12 @@ font-size: 1em;
 }
 
 
-
-.titreprofil{
+.titreprofil {
     text-align: center;
     font-size: 2em;
 }
 
-.profiluser{
+.profiluser {
     display: flex;
     flex-wrap: wrap;
 }
@@ -233,7 +241,7 @@ font-size: 1em;
     max-height: 180px;
     min-height: 180px;
     max-width: 180px;
-    min-width: 180px ;
+    min-width: 180px;
     object-fit: cover;
     border-radius: 50%;
     margin-bottom: 10px;
@@ -277,7 +285,7 @@ font-size: 1em;
     font-weight: bold;
 }
 
-.infousertxt #text{
+.infousertxt #text {
     display: flex;
     align-items: end;
 }
@@ -288,6 +296,7 @@ font-size: 1em;
     align-items: center;
     margin: 3vh;
 }
+
 input[type="email"],
 input[type="password"] {
     width: 100%;
@@ -309,15 +318,15 @@ input[type="password"] {
     cursor: pointer;
 }
 
-.titrelogin{
+.titrelogin {
     margin-bottom: 3vh;
 }
 
-.sesouvenir{
-  margin-bottom: 2vh;
+.sesouvenir {
+    margin-bottom: 2vh;
 }
 
-.containersortie{
+.containersortie {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -325,11 +334,12 @@ input[type="password"] {
     margin-top: 50px;
 }
 
-.containersortie form{
+.containersortie form {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
+
 .buttons-container {
     display: flex;
     flex-direction: row;
@@ -342,7 +352,7 @@ input[type="password"] {
     flex-direction: column;
     align-items: center;
     border: #448E36 5px solid;
-    padding: 2vh   ;
+    padding: 2vh;
 
 }
 
@@ -389,8 +399,8 @@ input[type="password"] {
     gap: 1rem;
 }
 
-.sortie-form .btnannuler{
-    padding:0.5vh 1.6vh 0.5vh 1.6vh;
+.sortie-form .btnannuler {
+    padding: 0.5vh 1.6vh 0.5vh 1.6vh;
     font-size: 0.8em;
     border-radius: 0.3vh;
     color: #00385b;
@@ -400,19 +410,21 @@ input[type="password"] {
 }
 
 
-.sortie-form button{
+.sortie-form button {
     margin: 0;
 }
-.usernav{
-display: flex;
+
+.usernav {
+    display: flex;
     justify-content: center;
     align-items: center;
 }
-.imgUsernav{
+
+.imgUsernav {
     max-height: 60px;
     min-height: 60px;
     max-width: 60px;
-    min-width: 60px ;
+    min-width: 60px;
     object-fit: cover;
     border-radius: 50%;
     margin-bottom: 10px;
@@ -420,7 +432,7 @@ display: flex;
     margin-right: 1vh;
 }
 
-.dropdown{
+.dropdown {
     margin-right: 5vh;
 }
 
@@ -428,10 +440,10 @@ display: flex;
 
     display: none;
     position: absolute;
-    z-index: 4  ;
+    z-index: 4;
     background-color: #f9f9f9;
     min-width: 180px;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
 
 .dropdown:hover .dropdown-content {
@@ -448,6 +460,7 @@ display: flex;
     background-color: #f2f2f2;
     color: #333;
 }
+
 .userForm {
     display: flex;
     flex-direction: column;
@@ -457,12 +470,13 @@ display: flex;
     padding: 3vh;
 }
 
-.userForm .form-group{
+.userForm .form-group {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
+
 .userForm label {
     display: block;
     margin-bottom: 0.5rem;
@@ -474,7 +488,7 @@ display: flex;
 .userForm select,
 .userForm textarea,
 .userForm input[type="email"],
-.userForminput[type="password"]{
+.userForminput[type="password"] {
     font-size: 1rem;
     padding: 0.5rem;
     border-radius: 4px;
@@ -511,8 +525,8 @@ display: flex;
     gap: 1rem;
 }
 
-.userForm .btnannuler{
-    padding:0.5vh 1.6vh 0.5vh 1.6vh;
+.userForm .btnannuler {
+    padding: 0.5vh 1.6vh 0.5vh 1.6vh;
     font-size: 0.8em;
     border-radius: 0.3vh;
     color: #00385b;
@@ -521,7 +535,7 @@ display: flex;
     text-align: center;
 }
 
-.userForm button{
+.userForm button {
     margin: 0;
 }
 
@@ -543,14 +557,15 @@ display: flex;
 
     text-align: center;
 }
+
 .recherche {
     display: flex; /* affiche les éléments en ligne */
     flex-wrap: wrap; /* permet à la recherche de s'afficher sur plusieurs lignes */
     justify-content: space-around; /* répartit l'espace disponible entre les éléments */
-   margin-right: 20vh;
+    margin-right: 20vh;
     margin-left: 20vh;
     padding: 2vh;
-
+    font-size: 0.8em;
 
 
 }
@@ -588,7 +603,7 @@ display: flex;
     margin-right: 5px; /* ajoute de l'espace entre les cases à cocher */
 }
 
-.recherchecontenairun{
+.recherchecontenairun {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
@@ -596,13 +611,13 @@ display: flex;
 
 }
 
-.recherchecontenairdeux{
+.recherchecontenairdeux {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-end;
     flex-direction: column;
 }
 
-.recherchebtn{
+.recherchebtn {
     text-align: center;
 }

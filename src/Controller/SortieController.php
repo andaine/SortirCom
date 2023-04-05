@@ -139,24 +139,30 @@ class SortieController extends AbstractController
             $user = $this->getUser();
             $sortie = $sortieRepository->find($idsortie);
 
-            //chercher en BDD si l'inscription existe sur l'user_id et la sortie_id
-            $inscription = $inscriptionRepository->findBy(['participant'=>$user, 'sortie'=>$sortie]);
+            if ($sortie->getNbInscriptionMax() > $sortie->getInscriptions()->count()){
+                //chercher en BDD si l'inscription existe sur l'user_id et la sortie_id
+                $inscription = $inscriptionRepository->findBy(['participant'=>$user, 'sortie'=>$sortie]);
 
 
-            if ($inscription ==  null){
-                $inscription = new Inscription();
-                $inscription->setParticipant($user);
-                $inscription->setSortie($sortie);
-                $inscription->setDate(new \DateTime('now'));
-                $entityManager->persist($inscription);
-                $entityManager->flush();
-                $this->addFlash("success", "Participation ajoutée ! ");
-            return $this->redirectToRoute('sorties');
+                if ($inscription ==  null){
+                    $inscription = new Inscription();
+                    $inscription->setParticipant($user);
+                    $inscription->setSortie($sortie);
+                    $inscription->setDate(new \DateTime('now'));
+                    $entityManager->persist($inscription);
+                    $entityManager->flush();
+                    $this->addFlash("success", "Participation ajoutée ! ");
+                    return $this->redirectToRoute('sorties');
+                }
+
+                $this->addFlash("warning", "Participant déja inscrit ! ");
+                return $this->redirectToRoute('sorties');
+
             }
 
-            $this->addFlash("warning", "Participant déja inscrit ! ");
-            return $this->redirectToRoute('sorties');
 
+            $this->addFlash("warning", "Inscription complète ! ");
+            return $this->redirectToRoute('sorties');
         }
 
     #[Route('seDesister/{idsortie}', name: 'desister')]
