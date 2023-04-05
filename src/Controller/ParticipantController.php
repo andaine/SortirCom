@@ -26,6 +26,7 @@ class ParticipantController extends AbstractController
             $userForm = $this->createForm(ParticipantType::class, $user);
             $userForm->handleRequest($req);
 
+
             if ($userForm->isSubmitted() && $userForm->isValid()) {
                 $photoFile = $userForm->get('photo')->getData();
 
@@ -43,7 +44,6 @@ class ParticipantController extends AbstractController
                     } catch (FileException $e) {
                         $this->addFlash('error', 'Picture not upload');
                     }
-
 
                 }
                 if ($userForm->get('newPassword')->getData() === $userForm->get('password')->getData()) {
@@ -68,7 +68,7 @@ class ParticipantController extends AbstractController
 
             return $this->render('user/modifier.html.twig', [
                     'user' => $user,
-                    'userForm' => $userForm->createView()]
+                    'userForm' => $userForm->createView(),]
             );
         } else {
             throw $this->createAccessDeniedException();
