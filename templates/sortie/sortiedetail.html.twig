@@ -2,41 +2,96 @@
 
 {% block body %}
 
-    <h2>{{ sortie.nom }}</h2>
-    <div>Date de la sortie : {{ sortie.dateHeureDebut|date("d/m/Y H:i") }}</div>
-    <div>Cloture des inscriptions :{{ sortie.dateLimiteInscription|date("d/m/Y") }}</div>
-    <div>Nombre de Place : {{ sortie.nbInscriptionMax }}</div>
-    <div>Durée : {{ sortie.duree }} minutes</div>
-    <div>{{ sortie.infoSortie }}</div>
 
-    <div>Lieu : {{ sortie.lieu.nom }}</div>
-    <div>Rue : {{ sortie.lieu.rue }}</div>
-    <div>Ville : {{ sortie.lieu.ville.nom }}</div>
-    <div>Code Postal : {{ sortie.lieu.ville.codePostal }}</div>
+    <h2 class="titresortiedetail">{{ sortie.nom }}</h2>
 
-    <div>Latitude : {{ sortie.lieu.latitude }}</div>
-    <div>Longitude : {{ sortie.lieu.longitude }}</div>
+    <div class="sortiedetailhaut">
+    <div></div>
+        <div>
+            <table class="tabinfo">
+                <tr>
+                    <td><b>Date de la sortie :</b></td>
+                    <td>{{ sortie.dateHeureDebut|date("d/m/Y H:i") }}</td>
+                </tr>
+                <tr>
+                    <td><b>Cloture des inscriptions :</b></td>
+                    <td>{{ sortie.dateLimiteInscription|date("d/m/Y") }}</td>
+                </tr>
+                <tr>
+                    <td><b>Nombre de Place :</b></td>
+                    <td>{{ sortie.nbInscriptionMax }}</td>
+                </tr>
+                <tr>
+                    <td><b>Durée :</b></td>
+                    <td>{{ sortie.duree }} minutes</td>
+                </tr>
+                    <tr>
+                        <td class="descriptionsortielibelle"><b>Description :</b></td>
+                        <td class="descriptionsortie">{{ sortie.infoSortie }}</td>
+                    </tr>
 
 
-    {% if sortie.inscriptions is empty %}
-        <p>Aucun participant n'est inscrit pour cette sortie.</p>
-    {% else %}
-        <h3>Liste des participants :</h3>
-        <ul>
-            {% for inscription in sortie.inscriptions %}
-                <li>
-                    <a href="{{ path('user_monProfil',{'id':inscription.participant.id}) }}"> {{ inscription.participant.prenom }} {{ inscription.participant.nom }}</a>
-                </li>
-            {% endfor %}
-        </ul>
-    {% endif %}
+            </table>
 
-    {% if (sortie.organisateur == app.user) and (sortie.etat.id == 1) %}
-        <a href="{{ path('modifier_sortie',{'id':sortie.id()}) }}">
-            <button>Modifier sortie</button>
-        </a>
-    {% endif %}
 
+
+        </div>
+        <div>
+            <table class="tabinfo">
+                <tr>
+                    <td><b>Lieu :</b></td>
+                    <td>{{ sortie.lieu.nom }}</td>
+                </tr>
+                <tr>
+                    <td><b>Rue :</b></td>
+                    <td>{{ sortie.lieu.rue }}</td>
+                </tr>
+                <tr>
+                    <td><b>Ville :</b></td>
+                    <td>{{ sortie.lieu.ville.nom }}</td>
+                </tr>
+                <tr>
+                    <td><b>Code Postal :</b></td>
+                    <td>{{ sortie.lieu.ville.codePostal }}</td>
+                </tr>
+                <tr>
+                    <td><b>Latitude :</b></td>
+                    <td>{{ sortie.lieu.latitude }}</td>
+                </tr>
+                <tr>
+                    <td><b>Longitude :</b></td>
+                    <td>{{ sortie.lieu.longitude }}</td>
+                </tr>
+            </table>
+        </div>
+        <div></div>
+    </div>
+
+    <div class="sortiedetailbas">
+        <div>
+        {% if sortie.inscriptions is empty %}
+            <p>Aucun participant n'est inscrit pour cette sortie.</p>
+        {% else %}
+            <h3>Liste des participants :</h3>
+            <table>
+                {% for inscription in sortie.inscriptions %}
+                    <tr>
+                        <td>
+                            <a href="{{ path('user_monProfil',{'id':inscription.participant.id}) }}"> {{ inscription.participant.prenom }} {{ inscription.participant.nom }}</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% endif %}
+        </div>
+        <div>
+        {% if (sortie.organisateur == app.user) and (sortie.etat.id == 1) %}
+            <a href="{{ path('modifier_sortie',{'id':sortie.id()}) }}">
+                <button>Modifier sortie</button>
+            </a>
+        {% endif %}
+        </div>
+    </div>
 {% endblock %}
 
 {% block title %}

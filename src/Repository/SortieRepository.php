@@ -84,7 +84,7 @@ class SortieRepository extends ServiceEntityRepository
             ->join('sorties.site','sites'); //sorties.site correspond au champ "site" de sorties
 
 
-        if (!empty($filtre->site)){
+        if (!empty($filtre->site)){ //"site" est l'attribut "site" de la class "filtre"
             $query = $query
                 ->andWhere('sites.id = (:site)')
                 ->setParameter('site', $filtre->site->getId());
@@ -117,7 +117,6 @@ class SortieRepository extends ServiceEntityRepository
                 ->setParameter('inscrit', $userConnecte);
         }
 
-//        ne fonctionne pas
         if (!empty($filtre->pasInscrit)){
             $query = $query
                 ->leftJoin('sorties.inscriptions', 'inscriptions', 'WITH', 'inscriptions.participant = :participant')
