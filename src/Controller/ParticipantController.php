@@ -33,6 +33,7 @@ class ParticipantController extends AbstractController
                     $originalFilename = pathinfo($photoFile->getCLientOriginalName(), PATHINFO_FILENAME);
                     $safeFilename = $slugger->slug($originalFilename);
                     $newFilename = $safeFilename . '-' . uniqid() . '.' . $photoFile->guessExtension();
+                    $user->setImage($newFilename);
 
                     try {
                         $photoFile->move(
@@ -42,7 +43,8 @@ class ParticipantController extends AbstractController
                     } catch (FileException $e) {
                         $this->addFlash('error', 'Picture not upload');
                     }
-                    $user->setImage($newFilename);
+
+
                 }
                 if ($userForm->get('newPassword')->getData() === $userForm->get('password')->getData()) {
                     if ($userForm->get('enregistrer')->isClicked()) {
@@ -66,7 +68,7 @@ class ParticipantController extends AbstractController
 
             return $this->render('user/modifier.html.twig', [
                     'user' => $user,
-                    'userForm' => $userForm->createView(),]
+                    'userForm' => $userForm->createView()]
             );
         } else {
             throw $this->createAccessDeniedException();
