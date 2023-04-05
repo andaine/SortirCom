@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Participant;
 use App\Form\RegistrationType;
 use App\Security\AppAuthenticator;
+use Doctrine\DBAL\Exception;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -33,18 +34,23 @@ class RegistrationController extends AbstractController
                     $form->get('password')->getData()
                 )
             );
-            $entityManager->persist($user);
-            $entityManager->flush();
-            // do anything else you need here, like send an email
+            try {
+                $entityManager->persist($user);
+                $entityManager->flush();
+                // do anything else you need here, like send an email
 
-            //return $userAuthenticator->authenticateUser(
-              //  $user,
+                //return $userAuthenticator->authenticateUser(
+                //  $user,
                 //$authenticator,
                 //$request)
-            $this->addFlash("success", "Utilisateur créé ! ");
-            return $this->render('registration/register.html.twig', [
-                'registrationForm' => $form->createView(),
-            ]);
+                $this->addFlash("success", "Utilisateur créé ! ");
+                return $this->render('registration/register.html.twig', [
+                    'registrationForm' => $form->createView(),
+                ]);
+            } catch (Exception $e) {
+                $this->addFlash("error", "Utilisateur déjà en bdd ! ");
+            }
+            
         }
 
         return $this->render('registration/register.html.twig', [
