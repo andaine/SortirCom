@@ -73,21 +73,15 @@ class ParticipantType extends AbstractType
 
             ->add('photo', FileType::class,[
                 'label' => 'Chargez ici votre photo de profil',
-                'required' => true,
                 'mapped' => false,
                 'constraints' => [
                     new Image([
                         'maxSize' => '8000k',
-                        //'maxSize' => '1024k',
-                       // 'minWidth'=> '80',
-                       // 'maxWidth'=> '120',
-                        //'minHeight'=> '80',
-                       // 'maxHeight'=> '120',
                         'mimeTypes' => [
                             'image/jpeg',
                             'image/png',
                         ],
-                        'mimeTypesMessage' => 'Please upload a valid JPG document',
+                        'mimeTypesMessage' => 'Please upload a valid document',
                     ])
                 ],
             ])
