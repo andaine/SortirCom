@@ -26,7 +26,7 @@ class SortieType extends AbstractType
                     'view_timezone' => 'Europe/Paris',]
             )
             ->add('duree', IntegerType::class, [
-                    'label'       => 'Durée ',
+                    'label'       => 'Durée (en min) ',
                     'required'    => true,
                     'attr'        => [
                         'min'      => 15,
