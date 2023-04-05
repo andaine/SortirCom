@@ -16,13 +16,19 @@
                 {{ form_widget(sortieForm.nom, {'attr': {'placeholder': 'Nom de la sortie'}}) }}
 
                 {{ form_label(sortieForm.dateHeureDebut) }}
-                {{ form_widget(sortieForm.dateHeureDebut, {'attr': {'placeholder': 'Date et heure de la sortie'}}) }}
-
+                {{ form_widget(sortieForm.dateHeureDebut) }}
                 {{ form_label(sortieForm.duree) }}
                 {{ form_widget(sortieForm.duree, {'attr': {'placeholder': 'Durée de la sortie'}}) }}
 
                 {{ form_label(sortieForm.dateLimiteInscription) }}
-                {{ form_widget(sortieForm.dateLimiteInscription, {'attr': {'placeholder': 'Date limite d\'inscription'}}) }}
+                {{ form_widget(sortieForm.dateLimiteInscription, {
+                    'attr': {
+                        'placeholder': 'Date limite d\'inscription'
+                    },
+                    'data': (sortieForm.nom.vars.value is empty)
+                    ? 'now'|date('Y-m-d H:i:s')
+                    : sortie.dateLimiteInscription|date('Y-m-d H:i:s')
+                }) }}
 
                 {{ form_label(sortieForm.nbInscriptionMax) }}
                 {{ form_widget(sortieForm.nbInscriptionMax, {'attr': {'placeholder': 'Nombre de participants max.'}}) }}
@@ -36,7 +42,11 @@
 
             <div class="form-group text-center">
                 <button class="btn" type="submit">Enregistrer</button>
-                <button class="btn" type="submit" name="publier" value="publier">Publier la sortie</button>
+                {% if sortieForm.nom.vars.value is not empty %}
+                    <button class="btn" type="submit" name="publier" value="publier">Publier la sortie</button>
+                {% else %}
+
+                {% endif %}
                 <a class="btnannuler" href="{{ path('sorties') }}">Annuler</a>
             </div>
             {{ form_end(sortieForm) }}

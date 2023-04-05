@@ -9,7 +9,14 @@
 
         <nav>
             {% if app.user %}
-                <a href="{{ path('sorties') }}">Accueil</a>
+
+                <div class="dropdown">
+                    <a href="{{ path('sorties') }}">Les Sorties</a>
+                    <div class="dropdown-content">
+                        <a href="{{ path('nouvelle_sortie') }}">Ajouter une sortie</a>
+
+                    </div>
+                </div>
                 <div class="dropdown">
                     <a class="usernav" href="{{ path('user_monProfil', {'id' : app.user.id})}}">
                         {% if app.user.image %}
@@ -22,7 +29,8 @@
                         <a href="{{ path('app_logout', {'id' : app.user.id}) }}">Déconnexion</a>
                     </div>
                 </div>
-                <a href="{{ path('nouvelle_sortie') }}">Ajouter une sortie</a>
+
+
             {% if is_granted('ROLE_ADMIN') %}
                 <a href="{{ path('register') }}" title="Créer user">Créer user</a>
             {% endif %}

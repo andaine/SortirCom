@@ -38,7 +38,8 @@ class SortieType extends AbstractType
             ->add('dateLimiteInscription', DateType::class,[
                 'widget'=>'single_text',
                 'html5'  => true,
-               'data'   => new \DateTime()
+
+
             ])
             ->add('nbInscriptionMax', IntegerType::class, [
                 'label'       => 'Nombre de participants max. ',
