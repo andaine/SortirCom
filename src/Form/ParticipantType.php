@@ -67,13 +67,14 @@ class ParticipantType extends AbstractType
                 'class' => Site::class,
                 'choice_label' => 'nom',
                 'query_builder' => function (EntityRepository $er) {
-                    return $er -> createQueryBuilder('s') -> orderBy('s.nom', 'ASC'); //fonction anonyme qui tri les séries par ordre alphabétiques
+                    return $er -> createQueryBuilder('s') -> orderBy('s.nom', 'ASC'); //fonction anonyme qui tri les sites par ordre alphabétique
                 }
             ])
 
             ->add('photo', FileType::class,[
                 'label' => 'Chargez ici votre photo de profil',
                 'mapped' => false,
+                'required' => false,
                 'constraints' => [
                     new Image([
                         'maxSize' => '8000k',

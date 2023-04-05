@@ -19,52 +19,60 @@ class ParticipantController extends AbstractController
     #[Route('user/modify/{id}', name: 'user_modifier')]
     public function modifierProfil(UserPasswordHasherInterface $userPasswordHasher, Request $req, ParticipantRepository $pr, $id, EntityManagerInterface $em, SluggerInterface $slugger): Response
     {
-        $user = $pr->find($id);
-        $userForm = $this->createForm(ParticipantType::class, $user);
-        $userForm->handleRequest($req);
+        $idUserConnecte = $this->getUser()->getId();
+        if ($idUserConnecte == $id) {
+            $user = $pr->find($id);
 
-        if ($userForm->isSubmitted() && $userForm->isValid()) {
-            $photoFile = $userForm -> get('photo')->getData();
+            $userForm = $this->createForm(ParticipantType::class, $user);
+            $userForm->handleRequest($req);
 
-            if($photoFile) {
-                $originalFilename = pathinfo($photoFile->getCLientOriginalName(), PATHINFO_FILENAME);
-                $safeFilename = $slugger->slug($originalFilename);
-                $newFilename = $safeFilename.'-'.uniqid().'.'.$photoFile->guessExtension();
+            if ($userForm->isSubmitted() && $userForm->isValid()) {
+                $photoFile = $userForm->get('photo')->getData();
 
-                try{
-                    $photoFile->move(
-                        $this->getParameter('photos_directory'),
-                        $newFilename
-                    );
-                } catch (FileException $e) {
-                   $this->addFlash('error', 'Picture not upload');
+                if ($photoFile) {
+                    $originalFilename = pathinfo($photoFile->getCLientOriginalName(), PATHINFO_FILENAME);
+                    $safeFilename = $slugger->slug($originalFilename);
+                    $newFilename = $safeFilename . '-' . uniqid() . '.' . $photoFile->guessExtension();
+                    $user->setImage($newFilename);
+
+                    try {
+                        $photoFile->move(
+                            $this->getParameter('photos_directory'),
+                            $newFilename
+                        );
+                    } catch (FileException $e) {
+                        $this->addFlash('error', 'Picture not upload');
+                    }
+
+
                 }
-                $user->setImage($newFilename);
-            }
-            if($userForm->get('newPassword')->getData() === $userForm->get('password')->getData()){
-                if($userForm->get('enregistrer')->isClicked()) {
-                    $user->setPassword(
-                        $userPasswordHasher->hashPassword(
-                        $user,
-                        $userForm->get('password')->getData()
-                    )
-                    );
-                    $em->flush();
-                    return $this->redirectToRoute('user_monProfil',['id'=> $user->getId()]);
+                if ($userForm->get('newPassword')->getData() === $userForm->get('password')->getData()) {
+                    if ($userForm->get('enregistrer')->isClicked()) {
+                        $user->setPassword(
+                            $userPasswordHasher->hashPassword(
+                                $user,
+                                $userForm->get('password')->getData()
+                            )
+                        );
+                        $em->flush();
+                        return $this->redirectToRoute('user_monProfil', ['id' => $user->getId()]);
+                    } else {
+                        return $this->redirectToRoute('user_monProfil', ['id' => $user->getId()]);
+                    }
                 } else {
-                    return $this->redirectToRoute('user_monProfil',['id'=> $user->getId()]);
+                    $this->addFlash('error', 'Les 2 mots de passe doivent être identiques');
+                    return $this->redirectToRoute('user_monProfil', ['id' => $user->getId()]);
                 }
-            } else {
-                $this->addFlash('error', 'Les 2 mots de passe doivent être identiques');
-                return $this->redirectToRoute('user_monProfil',['id'=> $user->getId()]);
+
             }
 
-        }
-
-        return $this->render('user/modifier.html.twig', [
-            'user' => $user,
-            'userForm'=>$userForm->createView(),]
+            return $this->render('user/modifier.html.twig', [
+                    'user' => $user,
+                    'userForm' => $userForm->createView()]
             );
+        } else {
+            throw $this->createAccessDeniedException();
+        }
     }
 
     #[Route('user/{id}', name: 'user_monProfil')]
