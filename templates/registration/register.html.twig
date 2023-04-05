@@ -3,11 +3,18 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
-    <h1>Créer un nouveau user</h1>
+    <div class="userForm">
+        <h1>Créer un nouveau user</h1>
+        <div class="form-group">
+            {{ form_start(registrationForm) }}
+            {{ form_widget(registrationForm)}}
+            <div class="form-group btn-group">
+             <button type="submit" class="btn">Register</button>
+             {{ form_end(registrationForm) }}
+            </div>
+        </div>
+    </div>
 
-    {{ form_start(registrationForm) }}
-        {{ form_widget(registrationForm)}}
 
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+
 {% endblock %}

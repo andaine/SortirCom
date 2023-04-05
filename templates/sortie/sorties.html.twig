@@ -6,10 +6,55 @@
 
     <h2>Liste des sorties </h2>
     <br>
-    <div class="recherche">
+
         {{ form_start(filtreForm) }}
-        {{ form_end(filtreForm) }}
+    <div class="recherche">
+        <div class="recherchecontenairun">
+        {{ form_label(filtreForm.site) }}
+        {{ form_widget(filtreForm.site) }}
+
+        {{ form_label(filtreForm.global) }}
+        {{ form_widget(filtreForm.global) }}
+
+        <div class="recherchedate">
+            {{ form_label(filtreForm.dateDebut) }}
+            {{ form_widget(filtreForm.dateDebut) }}
+            {{ form_label(filtreForm.dateFin) }}
+            {{ form_widget(filtreForm.dateFin) }}
+         </div>
+
+        </div>
+        <div class="recherchecontenairdeux">
+
+            <div class="recherchecheckunite">
+                {{ form_label(filtreForm.organisateur) }}
+                {{ form_widget(filtreForm.organisateur) }}
+            </div>
+            <div class="recherchecheckunite">
+                {{ form_label(filtreForm.inscrit) }}
+                {{ form_widget(filtreForm.inscrit) }}
+            </div>
+            <div class="recherchecheckunite">
+                {{ form_label(filtreForm.pasInscrit) }}
+                {{ form_widget(filtreForm.pasInscrit) }}
+            </div>
+            <div class="recherchecheckunite">
+                {{ form_label(filtreForm.sortiePassee) }}
+                {{ form_widget(filtreForm.sortiePassee) }}
+            </div>
+        </div>
+
     </div>
+
+    <div class="recherchebtn">
+        {{ form_widget(filtreForm.rechercher) }}
+    </div>
+
+        {{ form_end(filtreForm) }}
+
+
+
+
     <br>
     <div class="sortiestyle">
         <table>

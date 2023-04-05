@@ -28,7 +28,7 @@ class FiltreType extends AbstractType
                 'required' => false
             ])
             ->add('global', TextType::class, [
-                'label' => 'Le nom de la sortie contient',
+                'label' => 'Recherche par nom',
                 'required' => false,
                 'attr' => [
                     'placeholder' => 'Rechercher'
@@ -53,11 +53,11 @@ class FiltreType extends AbstractType
 
             ])
             ->add('inscrit',CheckboxType::class, [
-                'label'    => 'Sorties auxquelles je suis inscrit/e',
+                'label'    => 'Sorties auxquelles je suis inscrit.e',
                 'required' => false
             ])
             ->add('pasInscrit',CheckboxType::class, [
-                'label'    => 'Sorties auxquelles je ne suis pas inscrit/e',
+                'label'    => 'Sorties auxquelles je ne suis pas inscrit.e',
                 'required' => false
             ])
             ->add('sortiePassee',CheckboxType::class, [

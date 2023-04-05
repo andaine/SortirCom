@@ -448,3 +448,161 @@ display: flex;
     background-color: #f2f2f2;
     color: #333;
 }
+.userForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: #448E36 5px solid;
+    padding: 3vh;
+}
+
+.userForm .form-group{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.userForm label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    margin-top: 1rem;
+}
+
+.userForm input,
+.userForm select,
+.userForm textarea,
+.userForm input[type="email"],
+.userForminput[type="password"]{
+    font-size: 1rem;
+    padding: 0.5rem;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    width: 100%;
+
+}
+
+.userForm input:focus,
+.userForm select:focus,
+.userForm textarea:focus {
+    outline: none;
+    border-color: #4d90fe;
+    box-shadow: 0 0 3px 2px rgba(77, 144, 254, 0.2);
+}
+
+.userForm .form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2vh;
+    width: 100%;
+}
+
+.userForm .form-group input[type="number"] {
+    width: auto;
+}
+
+.userForm .btn {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.userForm .btnannuler{
+    padding:0.5vh 1.6vh 0.5vh 1.6vh;
+    font-size: 0.8em;
+    border-radius: 0.3vh;
+    color: #00385b;
+    border: #00385b 0.15em solid;
+    background-color: #ffffdd;
+    text-align: center;
+}
+
+.userForm button{
+    margin: 0;
+}
+
+.userForm .btn-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 2rem;
+    font-size: 1.2em;
+}
+
+.userForm .btn-group .btnenregistrer {
+
+    text-align: center;
+}
+
+.userForm .btn-group .btnannuler {
+
+    text-align: center;
+}
+.recherche {
+    display: flex; /* affiche les éléments en ligne */
+    flex-wrap: wrap; /* permet à la recherche de s'afficher sur plusieurs lignes */
+    justify-content: space-around; /* répartit l'espace disponible entre les éléments */
+   margin-right: 20vh;
+    margin-left: 20vh;
+    padding: 2vh;
+
+
+
+}
+
+.recherche label {
+    margin-right: 10px; /* ajoute de l'espace entre les labels et les éléments de formulaire */
+}
+
+
+.recherchedate, .recherchecheck {
+    display: flex; /* affiche les éléments en ligne */
+    flex-wrap: wrap; /* permet à la recherche de s'afficher sur plusieurs lignes */
+    justify-content: space-between; /* répartit l'espace disponible entre les éléments */
+    align-items: center; /* aligne les éléments verticalement */
+    margin-top: 10px; /* ajoute de l'espace entre les éléments */
+}
+
+.recherchedate label, .recherchecheck label {
+    margin-right: 10px; /* ajoute de l'espace entre les labels et les éléments de formulaire */
+}
+
+.recherchecheck {
+    display: flex; /* affiche les éléments en ligne */
+    flex-wrap: wrap; /* permet à la recherche de s'afficher sur plusieurs lignes */
+    justify-content: space-between; /* répartit l'espace disponible entre les éléments */
+    align-items: center; /* aligne les éléments verticalement */
+    flex-direction: column;
+}
+
+.recherchecheck label {
+    margin-right: 10px; /* ajoute de l'espace entre les labels et les cases à cocher */
+}
+
+.recherchecheck input[type="checkbox"] {
+    margin-right: 5px; /* ajoute de l'espace entre les cases à cocher */
+}
+
+.recherchecontenairun{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    flex-direction: column;
+
+}
+
+.recherchecontenairdeux{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    flex-direction: column;
+}
+
+.recherchebtn{
+    text-align: center;
+}
