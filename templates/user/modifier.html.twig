@@ -53,7 +53,7 @@
 
     <div class="form-group btn-group">
         {{ form_widget(userForm.enregistrer, {'label': 'Enregistrer', 'attr': {'class': 'btnenregistrer'}}) }}
-        {{ form_widget(userForm.annuler, {'label': 'Annuler', 'attr': {'class': 'btnannuler'}}) }}
+        <a class="btnannuler" href="{{ path('user_monProfil',{'id':app.user.id})}}">Annuler</a>
     </div>
 
             </div>
