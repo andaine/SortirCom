@@ -10,21 +10,21 @@
         <nav>
             {% if app.user %}
 
-                <div class="dropdown">
+                <div class="sousnav">
                     <a href="{{ path('sorties') }}">Les Sorties</a>
-                    <div class="dropdown-content">
+                    <div class="sousnav-content">
                         <a href="{{ path('nouvelle_sortie') }}">Ajouter une sortie</a>
 
                     </div>
                 </div>
-                <div class="dropdown">
+                <div class="sousnav">
                     <a class="usernav" href="{{ path('user_monProfil', {'id' : app.user.id})}}">
                         {% if app.user.image %}
                             <img class="imgUsernav" src="{{ asset('img/Photos/'~app.user.image) }}" alt=""><br>
                         {% endif %}
                         Mon profil
                     </a>
-                    <div class="dropdown-content">
+                    <div class="sousnav-content">
                         <a href="{{ path('user_modifier', {'id' : app.user.id})}}">Modifier mon profil</a>
                         <a href="{{ path('app_logout', {'id' : app.user.id}) }}">Déconnexion</a>
                     </div>
