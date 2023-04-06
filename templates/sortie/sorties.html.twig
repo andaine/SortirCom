@@ -2,8 +2,6 @@
 
 {% block body %}
 
-
-
     <h2>Liste des sorties </h2>
     <br>
 
@@ -53,8 +51,6 @@
         {{ form_end(filtreForm) }}
 
 
-
-
     <br>
     <div class="sortiestyle">
         <table>
@@ -80,7 +76,7 @@
                     <td>{{ sortie.inscriptions.count }} / {{ sortie.nbInscriptionMax }}</td>
                     <td>{{ sortie.etat.libelle }}</td>
                     <td>
-                        <a href="{{ path('user_monProfil',{'id':sortie.organisateur.id}) }}">{{ sortie.organisateur.nom }}</a>
+                        <a href="{{ path('user_monProfil',{'id':sortie.organisateur.id}) }}">{{ sortie.organisateur.prenom }} {{ sortie.organisateur.nom }}</a>
                     </td>
 
                     {% set inscrit = false %}
@@ -129,4 +125,3 @@
 {% block title %}
     {{ parent() }} - Accueil
 {% endblock %}
-
