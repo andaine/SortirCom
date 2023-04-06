@@ -71,7 +71,11 @@ class ParticipantController extends AbstractController
                     'userForm' => $userForm->createView(),]
             );
         } else {
-            throw $this->createAccessDeniedException();
+        //    throw $this->createAccessDeniedException();
+            $this->addFlash('error', 'Accès refusé !');
+            return $this->render('error/pirate.html.twig',
+
+            );
         }
     }
 
