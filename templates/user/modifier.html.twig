@@ -14,47 +14,15 @@
                 <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
             {% endfor %}
 
-            {{ form_label(userForm.pseudo) }}
-            {{ form_widget(userForm.pseudo) }}
-            {{ form_errors(userForm.pseudo) }}
-
-            {{ form_label(userForm.prenom) }}
-            {{ form_widget(userForm.prenom) }}
-            {{ form_errors(userForm.prenom) }}
-
-            {{ form_label(userForm.nom) }}
-            {{ form_widget(userForm.nom) }}
-            {{ form_errors(userForm.nom) }}
-
-            {{ form_label(userForm.telephone) }}
-            {{ form_widget(userForm.telephone) }}
-            {{ form_errors(userForm.telephone) }}
-
-            {{ form_label(userForm.email) }}
-            {{ form_widget(userForm.email) }}
-            {{ form_errors(userForm.email) }}
-
-            {{ form_label(userForm.password) }}
-            {{ form_widget(userForm.password) }}
-            {{ form_errors(userForm.password) }}
-
-            {{ form_label(userForm.newPassword) }}
-            {{ form_widget(userForm.newPassword) }}
-            {{ form_errors(userForm.newPassword) }}
-
-            {{ form_label(userForm.site) }}
-            {{ form_widget(userForm.site) }}
-            {{ form_errors(userForm.site) }}
-
-            {{ form_label(userForm.photo) }}
-            {{ form_widget(userForm.photo) }}
-            {{ form_errors(userForm.photo) }}
+            {{ form_widget(userForm) }}
 
 
-            <div class="form-group btn-group">
-                {{ form_widget(userForm.enregistrer, {'label': 'Enregistrer', 'attr': {'class': 'btnenregistrer'}}) }}
+{#            <div class="form-group btn-group">#}
+{#                {{ form_widget(userForm.enregistrer, {'label': 'Enregistrer', 'attr': {'class': 'btnenregistrer'}}) }}#}
                 <a class="btnannuler" href="{{ path('user_monProfil',{'id':app.user.id}) }}">Annuler</a>
-            </div>
+{#            </div>#}
+
+            {{ form_end(userForm) }}
 
         </div>
     </div>
