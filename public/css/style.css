@@ -540,7 +540,7 @@ input[type="password"] {
     width: auto;
 }
 
-.userForm .btn {
+.userForm button {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -558,8 +558,10 @@ input[type="password"] {
 }
 
 .userForm button {
-    margin: 0;
+    margin : 2vh 0 2vh 0;
 }
+
+.
 
 .userForm .btn-group {
     display: flex;
