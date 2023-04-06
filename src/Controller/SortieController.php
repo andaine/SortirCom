@@ -207,7 +207,7 @@ class SortieController extends AbstractController
         $sortie = $sortieRepository->find($id);
         $sortieForm = $this->createFormBuilder($sortie)
             ->add('infoSortie', TextareaType::class, [
-                'label' => 'Motif d\'annulation',
+                'label' => 'Motif d\'annulation :',
                 'required' => true,
                 'attr' => ['rows' => 4],
             ])

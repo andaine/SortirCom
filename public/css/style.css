@@ -202,6 +202,28 @@ font-size: 1em;
     justify-content: space-around;
 }
 
+.annulersortie {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 10vh 4vh 10vh;
+}
+
+.annulersortie .form-group .btn-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 2vh;
+}
+
+.annulersortie .btnenregistrer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    text-align: center;
+}
 
 
 .titreprofil{

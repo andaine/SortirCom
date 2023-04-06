@@ -1,20 +1,38 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-{{ parent() }} - Annuler Sortie
+    {{ parent() }} - Annuler Sortie
 {% endblock %}
 
 {% block body %}
-<h2>Annuler une sortie : </h2>
 
-    <h3>{{sortie.nom }}</h3>
-    <div>Date de la sortie : {{ sortie.dateHeureDebut|date("d/m/Y H:i") }}</div>
-   <div>Site de l'organisateur : {{ sortie.organisateur.site.nom }}</div>
-    <div>Lieu : {{ sortie.lieu.nom }} {{ sortie.lieu.rue}} {{ sortie.lieu.ville.nom }}</div>
+    <h2 class="titresortiedetail">{{ sortie.nom }}</h2>
+
+    <div class="annulersortie">
+        <table class="tabinfo">
+            <tr>
+                <td><b>Date de la sortie :</b></td>
+                <td>{{ sortie.dateHeureDebut|date("d/m/Y H:i") }}</td>
+            </tr>
+            <tr>
+                <td><b>Site de l'organisateur :</b></td>
+                <td>{{ sortie.organisateur.site.nom }}</td>
+            </tr>
+            <tr>
+                <td><b>Lieu :</b></td>
+                <td>{{ sortie.lieu.nom }} {{ sortie.lieu.rue }} {{ sortie.lieu.ville.nom }}</td>
+            </tr>
+            <tr>
+                <td><b> {{ form_label(sortieForm.infoSortie)}}</b></td>
+                <td>{{ form_widget(sortieForm.infoSortie)}}</td>
+            </tr>
+
+        </table>
+
+            {{ form_widget(sortieForm.valider, {'attr': {'class': 'btnenregistrer'}})}}
+
+    </div>
 
 
-{{ form_start(sortieForm) }}
-
-    {{ form_end(sortieForm) }}
 {% endblock %}
 
