@@ -102,28 +102,32 @@ class SortieController extends AbstractController
                                    EntityManagerInterface $entityManager,
                                    EtatRepository         $etatRepository): Response
     {
+        $idUserConnecte = $this->getUser()->getId();
+
         $sortie = $sortieRepository->find($id);
-        $sortieForm = $this->createForm(SortieType::class, $sortie);
 
-        $sortieForm->handleRequest($request);
+        if ($idUserConnecte == $sortie->getOrganisateur()->getId()) {
+            $sortieForm = $this->createForm(SortieType::class, $sortie);
 
-        if ($request->get('publier') == 'publier') {
-            return $this->publierSortie($id, $sortieRepository, $entityManager, $etatRepository);
+            $sortieForm->handleRequest($request);
 
+            if ($request->get('publier') == 'publier') {
+                return $this->publierSortie($id, $sortieRepository, $entityManager, $etatRepository);
+            }
 
+            if ($sortieForm->isSubmitted() && $sortieForm->isValid()) {
+                $entityManager->flush();
+                $this->addFlash("success", "Sortie modifiée ! ");
+                return $this->redirectToRoute('sorties');
+            }
+
+            return $this->render('sortie/nouvellesortie.html.twig', [
+                'sortieForm' => $sortieForm,
+                'sortie' => $sortie
+            ]);
         }
-
-        if ($sortieForm->isSubmitted() && $sortieForm->isValid()) {
-            $entityManager->flush();
-            $this->addFlash("success", "Sortie modifiée ! ");
-            return $this->redirectToRoute('sorties');
-        }
-
-        return $this->render('sortie/nouvellesortie.html.twig', [
-            'sortieForm' => $sortieForm,
-            'sortie' => $sortie
-
-        ]);
+        $this->addFlash('error', 'Accès refusé !');
+        return $this->render('error/pirate.html.twig');
     }
 
 

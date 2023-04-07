@@ -129,9 +129,6 @@ class SortieRepository extends ServiceEntityRepository
                 ->setParameter('dateJour', $dateJour);
         }
 
-
         return $query->getQuery()->getResult();
     }
-
-
 }
