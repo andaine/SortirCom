@@ -540,7 +540,7 @@ input[type="password"] {
     width: auto;
 }
 
-.userForm .btn {
+.userForm button {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -558,8 +558,10 @@ input[type="password"] {
 }
 
 .userForm button {
-    margin: 0;
+    margin : 2vh 0 2vh 0;
 }
+
+
 
 .userForm .btn-group {
     display: flex;
@@ -642,4 +644,25 @@ input[type="password"] {
 
 .recherchebtn {
     text-align: center;
+}
+
+
+.pirate{
+    color: darkred;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding: 2vh;
+
+}
+
+.pirateimg{
+
+    max-width: 300px;
+    min-width: 300px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    border: #448E36 5px solid;
 }
